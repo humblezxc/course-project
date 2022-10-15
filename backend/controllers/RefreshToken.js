@@ -1,5 +1,7 @@
 import Users from "../models/UserModel.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const refreshToken = async(req, res) => {
     try {
@@ -16,9 +18,11 @@ export const refreshToken = async(req, res) => {
             const userId = user[0].id;
             const name = user[0].name;
             const email = user[0].email;
-            const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
-                expiresIn: '15s'
-            });
+            const accessToken = jwt.sign(
+                {userId, name, email},
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: '15s' }
+            );
             res.json({ accessToken });
         });
     } catch (error) {
