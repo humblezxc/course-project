@@ -17,6 +17,7 @@
     "nodemon": "^2.0.20",
     "react-router-dom": "^6.4.2",
     "sequelize": "^6.25.1",
+    "sequelize-cli": "^6.5.1",
     "styled-components": "^5.3.6"
   },
   "engines": {
