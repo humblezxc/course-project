@@ -2,10 +2,6 @@
   "main": "backend/index.js",
   "type": "module",
   "dependencies": {
-    "@fontsource/roboto": "^4.5.8",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.9",
-    "@mui/styled-engine-sc": "^5.10.6",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -16,8 +12,7 @@
     "node": "^18.10.0",
     "nodemon": "^2.0.20",
     "react-router-dom": "^6.4.2",
-    "sequelize": "^6.25.1",
-    "styled-components": "^5.3.6"
+    "sequelize": "^6.25.1"
   },
   "engines": {
     "node": "v18.4.0",
