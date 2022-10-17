@@ -4,7 +4,10 @@ import db from "../config/Database.js";
 const { DataTypes } = Sequelize;
 
 const Users = db.define('users',{
-    name:{
+    firstName:{
+        type: DataTypes.STRING
+    },
+    lastName:{
         type: DataTypes.STRING
     },
     email:{
