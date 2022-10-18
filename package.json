@@ -1,6 +1,22 @@
 {
+  "name": "course-project",
+  "homepage": ".",
+  "proxy": "http://localhost:$(grep PORT .env | cut -d '=' -f2)",
+  "version": "1.0.0",
+  "description": "",
   "main": "backend/index.js",
   "type": "module",
+  "engines": {
+    "node": "v18.4.0"
+  },
+  "scripts": {
+    "start": "node backend/index.js",
+    "build": "cd frontend && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
@@ -13,14 +29,5 @@
     "nodemon": "^2.0.20",
     "react-router-dom": "^6.4.2",
     "sequelize": "^6.25.1"
-  },
-  "engines": {
-    "node": "v18.4.0",
-    "npm": "8.14.0"
-  },
-  "scripts": {
-    "start": "nodemon backend/index.js",
-    "build": "cd frontend && npm install && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
