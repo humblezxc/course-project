@@ -4,6 +4,7 @@ const routes = {
     REGISTER: "/register",
     COLLECTION_CREATE: "/collections/create",
     COLLECTIONS: "/collections",
+    COLLECTION_SHOW: "/collections/:id",
     ITEMS: "/collections/:collectionId/items",
     ITEM_CREATE: "/collections/:collectionId/items/create",
     ITEM_EDIT: "/collections/:collectionId/items/:itemId/edit",

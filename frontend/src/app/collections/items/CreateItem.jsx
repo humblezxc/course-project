@@ -67,7 +67,7 @@ export default function CreateItem() {
         try {
             await axios.post(`/collections/${collectionId}/items`, newItem);
             // redirect to /collections after creating a new item
-            navigate("/collections");
+            navigate("/collections/" + collectionId);
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data.msg);
