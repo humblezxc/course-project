@@ -2,10 +2,13 @@ import React from "react";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import routes from "../../shared/constants/routes";
 
 export default function Home() {
     return (
         <>
+            <Button key="index" variant="contained" href={routes.COLLECTIONS}>Collections</Button>
             <Box my={2}>
                 <Typography variant="h2">Home page</Typography>
             </Box>

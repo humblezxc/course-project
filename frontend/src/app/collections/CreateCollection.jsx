@@ -6,22 +6,11 @@ import Container from "@mui/material/Container";
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Typography from "@mui/material/Typography";
 import Checkbox from '@mui/material/Checkbox';
-import FormControl from '@mui/material/FormControl';
-import {FormGroup, FormLabel} from "@mui/material";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import * as PropTypes from "prop-types";
-import { Controller, useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-
-Controller.propTypes = {
-    name: PropTypes.string,
-    control: PropTypes.any,
-    render: PropTypes.func
-};
 export default function createCollection() {
     const [collectionName, setCollectionName] = useState('');
     const [teg, setTeg] = useState('');

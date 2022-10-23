@@ -13,6 +13,9 @@ const Collections = db.define('collections',{
     topic:{
         type: DataTypes.STRING
     },
+    userId: {
+        type: DataTypes.INTEGER
+    },
     digit_1_enabled:{
         type: DataTypes.BOOLEAN
     },
