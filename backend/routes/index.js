@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/users', verifyToken, getUsers);
 router.post('/users', Register);
 router.get('/collections', getCollections)
-router.post('/collections', verifyToken, NewCollection);
+router.post('/collections', NewCollection);
 router.post('/login', Login);
 router.get('/token', refreshToken);
 router.delete('/logout', Logout);

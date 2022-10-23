@@ -60,7 +60,6 @@ export default function createCollection() {
         );
     }
     const handleInput = ({ target }) => {
-        console.log(additionFields.map(({ key, enabled, value})=> { return {[`${key}_value`]: value, [`${key}_enabled`]: enabled} } ))
         setAdditionFields(current =>
             current.map(obj => {
                 if (obj.key === target.id) {
@@ -75,34 +74,6 @@ export default function createCollection() {
 
     const navigate = useNavigate();
 
-    // const integerFields = ['digit_1', 'digit_2', 'digit_3'];
-    // const stringFields = ['string_1', 'string_2', 'string_3'];
-    // const textFields = ['text_1', 'text_2', 'text_3'];
-    // const booleanFields = ['boolean_1', 'boolean_2', 'boolean_3'];
-    // const dateFields = ['date_1', 'date_2', 'date_3'];
-
-    const { control } = useForm({
-        defaultValues: {
-            fruits: []
-        }
-    });
-
-    const AdditionLabels = [
-        {
-            label: <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        name="firstName"
-                        fullWidth
-                        id="firstName"
-                        label="Column name"
-                        autoFocus
-                    />
-                </Grid>
-            </Grid>,
-            value: ""
-        }
-    ];
     const createCollection = async (e) => {
         e.preventDefault();
         const params = {
@@ -111,7 +82,7 @@ export default function createCollection() {
             description: description
         }
         const object = additionFields.reduce(
-            (obj, item) => Object.assign(obj, { [`${item.key}_value`]: item.value, [`${item.key}_enabled`]: item.enabled }), {});
+            (obj, item) => Object.assign(obj, { [`${item.key}_name`]: item.value, [`${item.key}_enabled`]: item.enabled }), {});
 
         try {
             await axios.post("/collections", { ...params,
@@ -147,7 +118,7 @@ export default function createCollection() {
                     autoComplete="off"
                 >
 
-                <Grid container spacing={2}>
+                    <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField id="collectionName" label="Collection name" variant="outlined" value={collectionName} onChange={(e) => setCollectionName(e.target.value)}/>
                         </Grid>
