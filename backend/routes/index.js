@@ -2,14 +2,16 @@ import express from "express";
 import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
+import {getCollections, NewCollection} from "../controllers/Collections.js";
 
 const router = express.Router();
-console.log("rotes start");
+
 router.get('/users', verifyToken, getUsers);
 router.post('/users', Register);
+router.get('/collections', getCollections)
+router.post('/collections', NewCollection);
 router.post('/login', Login);
 router.get('/token', refreshToken);
 router.delete('/logout', Logout);
-console.log("rotes end");
 
 export default router;
