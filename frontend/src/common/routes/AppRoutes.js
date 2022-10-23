@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Login from "../../app/auth/Login";
 import Home from "../../app/home/Home";
 import Register from "../../app/auth/Register";
-import CreateCollection from "../../app/collection/CreateCollection"
-import CreateItem from "../../app/collection/items/CreateItem"
+import CreateCollection from "../../app/collections/CreateCollection"
+import CreateItem from "../../app/collections/items/CreateItem"
 import routes from "../../shared/constants/routes";
 
 export default function AppRoutes() {

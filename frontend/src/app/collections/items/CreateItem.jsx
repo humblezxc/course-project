@@ -1,5 +1,5 @@
 // Create Item Component for Collections
-// This component is used to create a new item in a collection with fields: itemName, collectionId, digit_1_value:INTEGER, digit_2_value:INTEGER, digit_3_value:INTEGER, string_1_value:STRING, string_2_value:STRING, string_3_value:STRING, text_1_value:TEXT, text_2_value:TEXT, text_3_value:TEXT, boolean_1_value:BOOLEAN, boolean_2_value:BOOLEAN, boolean_3_value:BOOLEAN, date_1_value:DATE, date_2_value:DATE, date_3_value:DATE
+// This component is used to create a new item in a collections with fields: itemName, collectionId, digit_1_value:INTEGER, digit_2_value:INTEGER, digit_3_value:INTEGER, string_1_value:STRING, string_2_value:STRING, string_3_value:STRING, text_1_value:TEXT, text_2_value:TEXT, text_3_value:TEXT, boolean_1_value:BOOLEAN, boolean_2_value:BOOLEAN, boolean_3_value:BOOLEAN, date_1_value:DATE, date_2_value:DATE, date_3_value:DATE
 // do not use class based components for this, use functional components with hooks
 // use material ui for styling
 
