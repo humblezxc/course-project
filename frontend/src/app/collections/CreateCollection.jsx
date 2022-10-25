@@ -85,7 +85,7 @@ export default function createCollection() {
         }
     }
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xl">
             <Box
                 sx={{
                     marginTop: 8,
@@ -94,7 +94,7 @@ export default function createCollection() {
                     alignItems: 'center',
                 }}
             >
-                <Typography component="h1" variant="h4">
+                <Typography component="h1" variant="h3">
                     New collection
                 </Typography>
                 <Box
@@ -108,29 +108,32 @@ export default function createCollection() {
                 >
 
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={4} sm={2}>
                             <TextField id="collectionName" label="Collection name" variant="outlined" value={collectionName} onChange={(e) => setCollectionName(e.target.value)}/>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={4} sm={2}>
                             <TextField id="teg" label="Teg" variant="outlined" value={teg} onChange={(e) => setTeg(e.target.value)}/>
                         </Grid>
-                        <Grid item xs={12}>
+                    </Grid>
+
+                    <Grid item xs={12} width={600} mt={2}>
                             <TextareaAutosize
                                 id="description"
                                 aria-label="minimum height"
                                 minRows={6}
                                 placeholder="Description"
                                 variant="outlined"
-                                style={{ width: 400 }}
+                                style={{ width: 475 }}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
                         </Grid>
 
-                        <Grid>
-                            <h3>Integer fields</h3>
+                    <Grid container spacing={5}>
+                        <Grid item xs={12} sm={2.4}>
+                        <h3>Integer fields</h3>
                             {additionFields.filter(field => field.key.includes('digit')).map(additionalField => (
-                                <Grid item xs={12} sm={12}>
+                                <Grid>
                                     <Checkbox {...additionalField}
                                               onChange={handleToggle}
                                               key={additionalField.key}
@@ -141,11 +144,10 @@ export default function createCollection() {
                                 </Grid>
                             ))}
                         </Grid>
-
-                        <Grid>
-                            <h3>String fields</h3>
+                        <Grid item xs={12} sm={2.4}>
+                        <h3>String fields</h3>
                             {additionFields.filter(field => field.key.includes('string')).map(additionalField => (
-                                <Grid item xs={12} sm={12}>
+                                <Grid>
                                     <Checkbox {...additionalField}
                                               onChange={handleToggle}
                                               key={additionalField.key}
@@ -156,11 +158,10 @@ export default function createCollection() {
                                 </Grid>
                             ))}
                         </Grid>
-
-                        <Grid>
+                        <Grid item xs={12} sm={2.4}>
                             <h3>Text fields</h3>
                             {additionFields.filter(field => field.key.includes('text')).map(additionalField => (
-                                <Grid item xs={12} sm={12}>
+                                <Grid>
                                     <Checkbox {...additionalField}
                                               onChange={handleToggle}
                                               key={additionalField.key}
@@ -171,8 +172,7 @@ export default function createCollection() {
                                 </Grid>
                             ))}
                         </Grid>
-
-                        <Grid>
+                        <Grid item xs={12} sm={2.4}>
                             <h3>Boolean fields</h3>
                             {additionFields.filter(field => field.key.includes('boolean')).map(additionalField => (
                                 <Grid item xs={12} sm={12}>
@@ -186,8 +186,7 @@ export default function createCollection() {
                                 </Grid>
                             ))}
                         </Grid>
-
-                        <Grid>
+                        <Grid item xs={12} sm={2.4}>
                             <h3>Date fields</h3>
                             {additionFields.filter(field => field.key.includes('date')).map(additionalField => (
                                 <Grid item xs={12} sm={12}>
@@ -201,8 +200,11 @@ export default function createCollection() {
                                 </Grid>
                             ))}
                         </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
 
-                        <Button
+                        <Grid item xs={12} sm={11.73}>
+                    <Button
                             type="submit"
                             fullWidth
                             variant="contained"
@@ -210,6 +212,7 @@ export default function createCollection() {
                         >
                             Create
                         </Button>
+                    </Grid>
                     </Grid>
                 </Box>
             </Box>
