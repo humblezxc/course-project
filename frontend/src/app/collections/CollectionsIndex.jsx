@@ -13,7 +13,7 @@ import routes from "../../shared/constants/routes";
 export default function CollectionIndex() {
     const [collection, setCollection] = useState([]);
     useEffect(() => {
-        axios.get("/collections")
+        axios.get("/api/collections")
             .then(res => {
                 setCollection(res.data);
             })

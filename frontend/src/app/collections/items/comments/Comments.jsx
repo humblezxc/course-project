@@ -13,7 +13,7 @@ export default function Comments({currentUserId}) {
     const itemId = window.location.pathname.split("/")[4];
 
     useEffect(() => {
-        axios.get("/collections/" + collectionId + "/items/" + itemId + "/comments")
+        axios.get("/api/collections/" + collectionId + "/items/" + itemId + "/comments")
             .then(res => {
                 setComments(res.data);
             })
@@ -24,7 +24,7 @@ export default function Comments({currentUserId}) {
     const addComment = async (text) => {
         console.log("addComment", text);
         try {
-            await axios.post("/collections/" + collectionId + "/items/" + itemId + "/comments", {
+            await axios.post("/api/collections/" + collectionId + "/items/" + itemId + "/comments", {
                 body: text,
             });
         } catch (error) {

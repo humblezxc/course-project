@@ -73,7 +73,7 @@ export default function CreateItem() {
             date_3_value
         };
         try {
-            await axios.post(`/collections/${collectionId}/items`, newItem);
+            await axios.post(`/api/collections/${collectionId}/items`, newItem);
             // redirect to /collections after creating a new item
             navigate("/collections/" + collectionId);
         } catch (error) {

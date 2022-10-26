@@ -13,7 +13,7 @@ export default function ItemShow () {
     const itemId = window.location.pathname.split("/")[4];
 
     useEffect(() => {
-        axios.get("/collections/" + collectionId + "/items/" + itemId)
+        axios.get("/api/collections/" + collectionId + "/items/" + itemId)
             .then(res => {
                 setItem(res.data);
             })

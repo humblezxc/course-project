@@ -11,7 +11,7 @@ export default function CollectionShow() {
     const collectionId = window.location.pathname.split("/")[2];
 
     useEffect(() => {
-        axios.get("/collections/" + collectionId)
+        axios.get("/api/collections/" + collectionId)
             .then(res => {
                 setCollection(res.data);
             })
@@ -23,7 +23,7 @@ export default function CollectionShow() {
     }, []);
 
     const getItems = () => {
-        axios.get("/collections/" + collectionId + "/items")
+        axios.get("/api/collections/" + collectionId + "/items")
             .then(res => {
                 setItems(res.data);
             })
@@ -32,7 +32,7 @@ export default function CollectionShow() {
 
     const deleteItem = async (itemId) => {
         try {
-            await axios.delete("/collections/" + collectionId + "/items/" + itemId)
+            await axios.delete("/api/collections/" + collectionId + "/items/" + itemId)
             getItems();
         } catch (error) {
             if (error.response) {

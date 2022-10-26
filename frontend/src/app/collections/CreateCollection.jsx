@@ -74,7 +74,7 @@ export default function CreateCollection() {
             (obj, item) => Object.assign(obj, { [`${item.key}_name`]: item.value, [`${item.key}_enabled`]: item.enabled }), {});
 
         try {
-            await axios.post("/collections", { ...params,
+            await axios.post("/api/collections", { ...params,
                 ...object
             });
             navigate("/");
