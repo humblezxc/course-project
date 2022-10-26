@@ -2,7 +2,26 @@ import Items from "../models/Item.js";
 
 export const getItems = async (req, res) => {
     try {
-        const items = await Items.findAll();
+        const items = await Items.findAll({
+            where: {
+                collectionId: req.params.id
+
+            }
+        });
+        res.json(items);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getItem = async (req, res) => {
+    try {
+        const items = await Items.findOne({
+            where: {
+                id: req.params.id
+
+            }
+        });
         res.json(items);
     } catch (error) {
         console.log(error);
