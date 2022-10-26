@@ -11,7 +11,7 @@ import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-export default function createCollection() {
+export default function CreateCollection() {
     const [collectionName, setCollectionName] = useState('');
     const [teg, setTeg] = useState('');
     const [description, setDescription] = useState('');

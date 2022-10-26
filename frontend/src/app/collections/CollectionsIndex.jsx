@@ -10,7 +10,7 @@ import {Card, CardActionArea, CardContent, List, ListItem, ListItemText, Typogra
 import Button from "@mui/material/Button";
 import routes from "../../shared/constants/routes";
 
-export default function collectionIndex() {
+export default function CollectionIndex() {
     const [collection, setCollection] = useState([]);
     useEffect(() => {
         axios.get("/collections")

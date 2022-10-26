@@ -5,7 +5,7 @@ import { List, ListItem, ListItemText} from "@mui/material";
 import Button from "@mui/material/Button";
 import routes from "../../shared/constants/routes";
 
-export default function collectionShow() {
+export default function CollectionShow() {
     const [collection, setCollection] = useState([]);
     const [items, setItems] = useState([]);
     const collectionId = window.location.pathname.split("/")[2];
