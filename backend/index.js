@@ -31,10 +31,10 @@ app.get("*", (req, res) => {
 
     if (defended.includes(path)) {
         // Return the actual file
-        res.sendFile(`${__dirname}/build/${path}`);
+        res.sendFile(`${__dirname}../frontend/build/${path}`);
     } else {
         // Otherwise, redirect to /build/index.html
-        res.sendFile(`${__dirname}/build/index.html`);
+        res.sendFile(`${__dirname}../frontend/build/index.html`);
     }
 });
 app.listen(process.env.PORT || 5000, ()=> console.log(`Server running at port ${process.env.PORT}`));
