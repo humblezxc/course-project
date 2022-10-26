@@ -202,17 +202,16 @@ export default function CreateCollection() {
                         </Grid>
                     </Grid>
                     <Grid container spacing={2}>
-
                         <Grid item xs={12} sm={11.73}>
-                    <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Create
-                        </Button>
-                    </Grid>
+                            <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    Create
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Box>
             </Box>
