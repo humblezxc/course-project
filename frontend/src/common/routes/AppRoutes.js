@@ -13,14 +13,14 @@ import routes from "../../shared/constants/routes";
 export default function AppRoutes() {
     return (
         <Routes>
-            <Route exact path={routes.HOME} element={<Home />} />
-            <Route path={routes.LOGIN} element={<Login />} />
-            <Route path={routes.REGISTER} element={<Register />} />
-            <Route path={routes.COLLECTION_SHOW} element={<CollectionShow />} />
-            <Route path={routes.COLLECTION_CREATE} element={<CreateCollection />} />
-            <Route path={routes.COLLECTIONS} element={<Collections />} />
-            <Route path={routes.ITEM_CREATE} element={<CreateItem/>} />
-            <Route path={routes.ITEM_SHOW} element={<ItemShow/>} />
+            <Route exact path={routes.HOME}  element={<Home />} />
+            <Route exact path={routes.LOGIN} element={<Login />} />
+            <Route exact path={routes.REGISTER} element={<Register />} />
+            <Route exact path={routes.COLLECTION_SHOW} element={<CollectionShow />} />
+            <Route exact path={routes.COLLECTION_CREATE} element={<CreateCollection />} />
+            <Route exact path={routes.COLLECTIONS} element={<Collections />} />
+            <Route exact path={routes.ITEM_CREATE} element={<CreateItem/>} />
+            <Route exact path={routes.ITEM_SHOW} element={<ItemShow/>} />
         </Routes>
     );
 }
