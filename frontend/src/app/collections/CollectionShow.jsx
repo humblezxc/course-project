@@ -54,8 +54,8 @@ export default function collectionShow() {
                 {items.map((item) => (
                     <ListItem key={item.id}>
                         <ListItemText primary={item.itemName} secondary={item.description}/>
-                        <Button variant="contained" href={routes.ITEMS + "/" + item.id}>View</Button>
-                        <Button variant="contained" href={routes.ITEMS + "/" + item.id + "/edit"}>Edit</Button>
+                        <Button variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/items/" + item.id}>View</Button>
+                        <Button variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/" + item.id + "/edit"}>Edit</Button>
                         <Button variant="contained" onClick={() => deleteItem(item.id)}>Delete</Button>
                     </ListItem>
                 ))}

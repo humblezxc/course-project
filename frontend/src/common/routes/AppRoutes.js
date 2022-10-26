@@ -7,6 +7,7 @@ import CreateCollection from "../../app/collections/CreateCollection"
 import Collections from "../../app/collections/CollectionsIndex"
 import CollectionShow from "../../app/collections/CollectionShow"
 import CreateItem from "../../app/collections/items/CreateItem"
+import ItemShow from "../../app/collections/items/ItemShow";
 import routes from "../../shared/constants/routes";
 
 export default function AppRoutes() {
@@ -19,6 +20,7 @@ export default function AppRoutes() {
             <Route path={routes.COLLECTION_SHOW} element={<CollectionShow />} />
             <Route path={routes.COLLECTION_CREATE} element={<CreateCollection />} />
             <Route path={routes.ITEM_CREATE} element={<CreateItem/>} />
+            <Route path={routes.ITEM_SHOW} element={<ItemShow/>} />
         </Routes>
     );
 }

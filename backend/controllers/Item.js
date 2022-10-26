@@ -14,6 +14,20 @@ export const getItems = async (req, res) => {
     }
 }
 
+export const getItem = async (req, res) => {
+    try {
+        const items = await Items.findOne({
+            where: {
+                id: req.params.id
+
+            }
+        });
+        res.json(items);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const newItem = async (req, res) => {
     try {
         // const userId = req.user.userId;
