@@ -7,7 +7,7 @@
   "main": "backend/index.js",
   "type": "module",
   "engines": {
-    "node": "v18.4.0"
+    "node": "v14.17.3"
   },
   "scripts": {
     "start": "node backend/index.js",
