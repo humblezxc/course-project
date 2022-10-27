@@ -19,8 +19,11 @@ app.use(cors({ credentials:true, origin:'*' }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
+app.get("/api", (req, res) => {
+    res.json({ message: "Hello from server!" });
+});
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
 });
 
