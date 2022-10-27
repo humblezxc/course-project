@@ -18,7 +18,9 @@ export default function AppRoutes() {
             <Route exact path={routes.LOGIN} element={<Login />} />
             <Route exact path={routes.REGISTER} element={<Register />} />
             <Route exact path={routes.COLLECTION_SHOW} element={<CollectionShow />} />
-            <Route exact path={routes.COLLECTIONS} element={<Collections />} />
+            <Route exact path='collections' element={<Collections />}>
+                <Route exact path='create' element={<CreateCollection />} />
+            </Route>
             <Route exact path={routes.ITEM_CREATE} element={<CreateItem/>} />
             <Route exact path={routes.ITEM_SHOW} element={<ItemShow/>} />
         </Routes>
