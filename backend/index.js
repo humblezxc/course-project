@@ -13,30 +13,30 @@ import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// app.use(express.static(path.resolve(__dirname, '../frontend/build')));
+app.use(express.static(path.resolve(__dirname, '../frontend/build', 'index.html')));
 
 app.use(cors({ credentials:true, origin:'*' }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
 
-// app.get('/*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
-// });
+app.get('/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+});
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("../frontend/build"));
-    app.get("/*", function(req, res) {
-        res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-    });
-}
-
-else {
-    app.use(express.static(path.join(__dirname, '../frontend/public')));
-    app.get("/*", function(req, res) {
-        res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
-    });
-}
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static("../frontend/build"));
+//     app.get("/*", function(req, res) {
+//         res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+//     });
+// }
+//
+// else {
+//     app.use(express.static(path.join(__dirname, '../frontend/public')));
+//     app.get("/*", function(req, res) {
+//         res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
+//     });
+// }
 // let defended = ['transformed.js', 'main.css', 'favicon.ico']
 //
 // app.get("*", (req, res) => {
