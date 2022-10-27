@@ -4,7 +4,7 @@ export const getItems = async (req, res) => {
     try {
         const items = await Items.findAll({
             where: {
-                collectionId: req.params.id
+                collectionId: req.params.collectionId
 
             }
         });

@@ -8,23 +8,23 @@ import {getComments, newComments} from "../controllers/Comments.js";
 
 const router = express.Router();
 
-router.get('/users', verifyToken, getUsers);
-router.post('/users', Register);
-router.post('/login', Login);
-router.get('/token', refreshToken);
-router.delete('/logout', Logout);
+router.get('/api/users', verifyToken, getUsers);
+router.post('/api/users', Register);
+router.post('/api/login', Login);
+router.get('/api/token', refreshToken);
+router.delete('/api/logout', Logout);
 
-router.get('/collections', getCollections)
-router.get('/collections/:id', getCollection)
-router.post('/collections', NewCollection);
+router.get('/api/collections', getCollections)
+router.get('/api/collections/:id', getCollection)
+router.post('/api/collections', NewCollection);
 
-router.get('/collections/:collectionId/items', getItems);
-router.get('/collections/:collectionId/items/:id', getItem);
-router.post('/collections/:collectionId/items', newItem);
-router.delete('/collections/:collectionId/items/:id', deleteItem);
+router.get('/api/collections/:collectionId/items', getItems);
+router.get('/api/collections/:collectionId/items/:id', getItem);
+router.post('/api/collections/:collectionId/items', newItem);
+router.delete('/api/collections/:collectionId/items/:id', deleteItem);
 
-router.get('/collections/:collectionId/items/:itemId/comments', getComments);
-router.post('/collections/:collectionId/items/:itemId/comments', newComments);
+router.get('/api/collections/:collectionId/items/:itemId/comments', getComments);
+router.post('/api/collections/:collectionId/items/:itemId/comments', newComments);
 
 
 export default router;

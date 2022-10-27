@@ -8,10 +8,12 @@ import db from "./config/Database.js";
 import router from "./routes/index.js";
 dotenv.config();
 const app = express();
-import {fileURLToPath} from 'url';
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
@@ -19,8 +21,11 @@ app.use(cors({ credentials:true, origin:'*' }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
+app.get("/api", (req, res) => {
+    res.json({ message: "Hello from server!" });
+});
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
 });
 

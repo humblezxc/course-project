@@ -11,7 +11,7 @@ import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-export default function createCollection() {
+export default function CreateCollection() {
     const [collectionName, setCollectionName] = useState('');
     const [teg, setTeg] = useState('');
     const [description, setDescription] = useState('');
@@ -74,7 +74,7 @@ export default function createCollection() {
             (obj, item) => Object.assign(obj, { [`${item.key}_name`]: item.value, [`${item.key}_enabled`]: item.enabled }), {});
 
         try {
-            await axios.post("/collections", { ...params,
+            await axios.post("/api/collections", { ...params,
                 ...object
             });
             navigate("/");
@@ -202,17 +202,16 @@ export default function createCollection() {
                         </Grid>
                     </Grid>
                     <Grid container spacing={2}>
-
                         <Grid item xs={12} sm={11.73}>
-                    <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Create
-                        </Button>
-                    </Grid>
+                            <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    Create
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Box>
             </Box>
