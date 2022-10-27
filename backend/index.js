@@ -24,19 +24,13 @@ app.use(router);
 //     res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
 // });
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.resolve(__dirname, '../frontend/build')));
-    app.get("/*", function(req, res) {
-        res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
-    });
-}
-
-else {
-    app.use(express.static(path.join(__dirname, '../frontend/public')));
-    app.get("/*", function(req, res) {
-        res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
-    });
-}
+// List of all the files that should be served as-is
+app.get("*", (req, res) => {
+    let url = path.join(__dirname, '../frontend/build', 'index.html');
+    if (!url.startsWith('/app/')) // since we're on local windows
+        url = url.substring(1);
+    res.sendFile(url);
+});
 
 // if (process.env.NODE_ENV === "production") {
 //     app.use(express.static("../frontend/build"));
