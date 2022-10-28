@@ -67,7 +67,7 @@ export default function CreateCollection() {
         e.preventDefault();
         const params = {
             collectionName: collectionName,
-            teg: teg,
+            // teg: teg,
             description: description
         }
         const object = additionFields.reduce(
