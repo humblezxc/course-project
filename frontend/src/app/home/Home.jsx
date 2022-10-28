@@ -2,61 +2,210 @@ import React from "react";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import routes from "../../shared/constants/routes";
+import ListItem from '@mui/material/ListItem';
+import List from '@mui/material/List';
+import ListItemText from '@mui/material/ListItemText';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Table from '@mui/material/Table';
 
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme();
+
+const Collections = ['fasd', 'fasd', 'fasd', 'fasd', 'fasd']
 export default function Home() {
+
+    const handleClick = () => {
+        console.info('You clicked the Chip.');
+    };
     return (
-        <>
-            <Button key="index" variant="contained" href={routes.COLLECTIONS}>Collections</Button>
-            <Box my={2}>
-                <Typography variant="h2">Home page</Typography>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <main>
+                <Box
+                    sx={{
+                        bgcolor: 'background.default',
+                        pt: 8,
+                        pb: 6,
+                    }}
+                >
+                    <Container maxWidth="xl">
+                        {/*<Typography*/}
+                        {/*    component="h1"*/}
+                        {/*    variant="h2"*/}
+                        {/*    align="center"*/}
+                        {/*    color="text.primary"*/}
+                        {/*    gutterBottom*/}
+                        {/*>*/}
+                        {/*    Home*/}
+                        {/*</Typography>*/}
+                        {/*<Container maxWidth="sm">*/}
+                        {/*    <Typography variant="h5" align="center" color="text.secondary" paragraph>*/}
+                        {/*        Something short and leading about the collection below—its contents,*/}
+                        {/*        the creator, etc. Make it short and sweet, but not too short so folks*/}
+                        {/*        don&apos;t simply skip over it entirely.*/}
+                        {/*    </Typography>*/}
+                        {/*    <Stack*/}
+                        {/*        sx={{ pt: 4 }}*/}
+                        {/*        direction="row"*/}
+                        {/*        spacing={2}*/}
+                        {/*        justifyContent="center"*/}
+                        {/*    >*/}
+                        {/*        <Button variant="contained">Main call to action</Button>*/}
+                        {/*        <Button variant="outlined">Secondary action</Button>*/}
+                        {/*    </Stack>*/}
+                        {/*</Container>*/}
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={4}>
+                                <Typography
+                                    component="h2"
+                                    variant="h4"
+                                    align='center'
+                                    color="text.primary"
+                                    gutterBottom
+                                >
+                                    Last added items
+                                </Typography>
+                                <Grid>
+                                    <List>
+                                        <ListItem>
+                                            <ListItemText
+                                                primary="CollectionName Collection Username ndgfhfghd fghj  jgfh ghjjj h gfhjf fghdfghdfghdfghiop"
+                                            />
+                                        </ListItem>
+                                    </List>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                <Typography
+                                    component="h2"
+                                    variant="h4"
+                                    align='center'
+                                    color="text.primary"
+                                    gutterBottom
+                                >
+                                    Top 5 the biggest Collections
+                                </Typography>
+                                <TableContainer component={Paper}>
+                                    <Table aria-label="simple table">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Number</TableCell>
+                                                <TableCell>CollectionName</TableCell>
+                                                <TableCell align="right">Descriptions</TableCell>
+                                                <TableCell align="right">Tags</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {Collections.map((row) => (
+                                                <TableRow
+                                                    key={row.name}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                >
+                                                    <TableCell component="th" scope="row">
+                                                        Number
+                                                    </TableCell>
+                                                    <TableCell align="right">CollectionName</TableCell>
+                                                    <TableCell align="right">Descriptions</TableCell>
+                                                    <TableCell align="right">Tags</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                <Typography
+                                    component="h2"
+                                    variant="h4"
+                                    align='center'
+                                    color="text.primary"
+                                    gutterBottom
+                                >
+                                    Tags cloud
+                                </Typography>
+
+                                <Stack direction="row" maxWidth="400px" spacing={1}>
+                                    <Chip label="Clickable" onClick={handleClick} />
+                                    <Chip label="Clickable" onClick={handleClick} />
+                                    <Chip label="Clickable" variant="outlined" onClick={handleClick} />
+                                </Stack>
+                                <Stack direction="row" maxWidth="400px" spacing={1}>
+                                    <Chip label="Clickable" onClick={handleClick} />
+                                    <Chip label="Clickable" onClick={handleClick} />
+                                    <Chip label="Clickable" variant="outlined" onClick={handleClick} />
+                                </Stack>
+                                <Stack direction="row" maxWidth="400px" spacing={1}>
+                                    <Chip label="Clickable" onClick={handleClick} />
+                                    <Chip label="Clickable" onClick={handleClick} />
+                                    <Chip label="Clickable" variant="outlined" onClick={handleClick} />
+                                </Stack>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Box>
+                <Container sx={{ py: 8 }} maxWidth="md">
+                    {/* End hero unit */}
+                    {/*<Grid container spacing={4}>*/}
+                    {/*    {cards.map((card) => (*/}
+                    {/*        <Grid item key={card} xs={12} sm={6} md={4}>*/}
+                    {/*            <Card*/}
+                    {/*                sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}*/}
+                    {/*            >*/}
+                    {/*                <CardMedia*/}
+                    {/*                    component="img"*/}
+                    {/*                    sx={{*/}
+                    {/*                        // 16:9*/}
+                    {/*                        pt: '56.25%',*/}
+                    {/*                    }}*/}
+                    {/*                    image="https://source.unsplash.com/random"*/}
+                    {/*                    alt="random"*/}
+                    {/*                />*/}
+                    {/*                <CardContent sx={{ flexGrow: 1 }}>*/}
+                    {/*                    <Typography gutterBottom variant="h5" component="h2">*/}
+                    {/*                        Heading*/}
+                    {/*                    </Typography>*/}
+                    {/*                    <Typography>*/}
+                    {/*                        This is a media card. You can use this section to describe the*/}
+                    {/*                        content.*/}
+                    {/*                    </Typography>*/}
+                    {/*                </CardContent>*/}
+                    {/*                <CardActions>*/}
+                    {/*                    <Button size="small">View</Button>*/}
+                    {/*                    <Button size="small">Edit</Button>*/}
+                    {/*                </CardActions>*/}
+                    {/*            </Card>*/}
+                    {/*        </Grid>*/}
+                    {/*    ))}*/}
+                    {/*</Grid>*/}
+                </Container>
+            </main>
+            {/* Footer */}
+            <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+                <Typography variant="h6" align="center" gutterBottom>
+                    Footer
+                </Typography>
+                <Typography
+                    variant="subtitle1"
+                    align="center"
+                    color="text.secondary"
+                    component="p"
+                >
+                    Something here to give the footer a purpose!
+                </Typography>
             </Box>
-            <Grid container spacing={4}>
-                <Grid item xs={12} md={6}>
-                    <Box>
-                        <Typography variant="h4">What is Lorem Ipsum?</Typography>
-                    </Box>
-                    <Box mt={2} textAlign="justify">
-                        <Typography variant="body1">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        </Typography>
-                    </Box>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Box>
-                        <Typography variant="h4">Why do we use it?</Typography>
-                    </Box>
-                    <Box mt={2} textAlign="justify">
-                        <Typography variant="body1">
-                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                        </Typography>
-                    </Box>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Box>
-                        <Typography variant="h4">Where does it come from?</Typography>
-                    </Box>
-                    <Box mt={2} textAlign="justify">
-                        <Typography variant="body1">
-                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                        </Typography>
-                    </Box>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Box>
-                        <Typography variant="h4">Where can I get some?</Typography>
-                    </Box>
-                    <Box mt={2} textAlign="justify">
-                        <Typography variant="body1">
-                            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-                        </Typography>
-                    </Box>
-                </Grid>
-            </Grid>
-
-
-
-        </>
+            {/* End footer */}
+        </ThemeProvider>
     );
 }
