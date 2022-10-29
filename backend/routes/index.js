@@ -3,7 +3,7 @@ import { getUsers, Register, Login, Logout } from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
 import {getCollections, NewCollection, getCollection} from "../controllers/Collections.js";
-import {deleteItem, getItem, getItems, newItem} from "../controllers/Item.js";
+import {deleteItem, getItem, getItems, lastItems, newItem} from "../controllers/Item.js";
 import {getComments, newComments} from "../controllers/Comments.js";
 
 const router = express.Router();
@@ -18,6 +18,7 @@ router.get('/api/collections', getCollections)
 router.get('/api/collections/:id', getCollection)
 router.post('/api/collections', NewCollection);
 
+router.get('/api/items', lastItems);
 router.get('/api/collections/:collectionId/items', getItems);
 router.get('/api/collections/:collectionId/items/:id', getItem);
 router.post('/api/collections/:collectionId/items', newItem);
