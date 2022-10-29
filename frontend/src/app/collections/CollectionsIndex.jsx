@@ -38,6 +38,7 @@ export default function CollectionIndex() {
                 >
                     My Collections
                 </Typography>
+                <Button variant="contained" href="/collections/create">Create Collection</Button>
                 <List>
                     {collection.map((collection) => (
                         <ListItem key={collection.id}>

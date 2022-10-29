@@ -176,14 +176,6 @@ export default function PrimarySearchAppBar() {
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="/collections/create"
-                            sx={{ my: 1, mx: 1.5 }}
-                        >
-                            Create collection
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
                             href="/collections"
                             sx={{ my: 1, mx: 1.5 }}
                         >
