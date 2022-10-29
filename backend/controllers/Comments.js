@@ -5,7 +5,10 @@ export const getComments = async (req, res) => {
         const comments = await Comments.findAll({
             where: {
                 itemId: req.params.itemId
-            }
+            },
+            order: [
+                ['createdAt', 'DESC'],
+            ]
         });
         res.json(comments);
 

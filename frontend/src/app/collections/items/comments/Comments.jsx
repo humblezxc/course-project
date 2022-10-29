@@ -4,10 +4,10 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import CommentForm from "./CommentForm";
+import {Typography} from "@mui/material";
 
 export default function Comments({currentUserId}) {
     const [comments, setComments] = useState([]);
-    const [items, setItems] = useState([]);
 
     const collectionId = window.location.pathname.split("/")[2];
     const itemId = window.location.pathname.split("/")[4];
@@ -22,7 +22,6 @@ export default function Comments({currentUserId}) {
     }, []);
 
     const addComment = async (text) => {
-        console.log("addComment", text);
         try {
             await axios.post("/api/collections/" + collectionId + "/items/" + itemId + "/comments", {
                 body: text,
@@ -34,11 +33,40 @@ export default function Comments({currentUserId}) {
         }
     }
     return(
-        <Box className={"comments"}>
-            <h3 className={"comments-title"}>Comments</h3>
-            <Grid className={"comment-form-title"}>Write comment</Grid>
+        <Box
+            sx={{
+                bgcolor: 'background.default',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+
+            }}
+        >
+            <Box
+                sx={{
+                    pt:8,
+                    pb: 6,
+                }}
+            >
+                <Typography component="h1"
+                            variant="h2"
+                            align="center"
+                            color="text.primary"
+                            gutterBottom
+                >
+                    Comments
+                </Typography>
+            </Box>
+            <Typography component="h2"
+                        variant="h4"
+                        align="center"
+                        color="text.primary"
+                        gutterBottom
+            >
+                Write a comment
+            </Typography>
             <CommentForm submitLabel={"write"} handleSubmit={addComment}/>
-            <Grid className={"comments-container"}>
+            <Grid xs={12} sm={12}>
                 {comments.map((comment) => (
                     <Comment key={comment.id} comment={comment}/>
                 ))}

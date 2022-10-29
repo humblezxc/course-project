@@ -2,9 +2,7 @@ import * as React from 'react';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
-import {ListItem, ListItemText} from "@mui/material";
-import Button from "@mui/material/Button";
-import routes from "../../../shared/constants/routes";
+import {Typography} from "@mui/material";
 import Comments from "./comments/Comments";
 
 export default function ItemShow () {
@@ -21,9 +19,33 @@ export default function ItemShow () {
     }, []);
 
     return(
-        <Box>
-            <h1>{item.itemName}</h1>
+        <Box
+            sx={{
+                bgcolor: 'background.default',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+
+            }}
+        >
+            <Box
+                sx={{
+                    pt:8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                <Typography component="h1"
+                            variant="h1"
+                            align="center"
+                            color="text.primary"
+                            gutterBottom
+                >
+                    {item.itemName}
+                </Typography>
             <Comments currentUserId={1}/>
+        </Box>
         </Box>
     );
 }
