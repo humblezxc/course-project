@@ -60,6 +60,7 @@ export default function CollectionShow() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+
                 }}
             >
                 <Box
@@ -105,7 +106,7 @@ export default function CollectionShow() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Items name</TableCell>
-                                    <TableCell></TableCell>
+                                    <TableCell>Items data</TableCell>
                                     <TableCell align="right">View</TableCell>
                                     <TableCell align="right">Edit</TableCell>
                                     <TableCell align="right">Delete</TableCell>
@@ -118,7 +119,7 @@ export default function CollectionShow() {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                                 <TableCell component="th" scope="row" >{item.itemName}</TableCell>
-                                                 <TableCell align="right"></TableCell>
+                                                 <TableCell>item data</TableCell>
                                                 <TableCell align="right"><Button variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/items/" + item.id}>View</Button></TableCell>
                                                 <TableCell align="right"><Button variant="outlined" href={routes.COLLECTIONS + "/" + collection.id + "/" + item.id + "/edit"}>Edit</Button></TableCell>
                                                 <TableCell align="right"><Button variant="contained" onClick={() => deleteItem(item.id)}>Delete</Button></TableCell>
