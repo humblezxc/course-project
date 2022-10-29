@@ -5,7 +5,6 @@ export const getItems = async (req, res) => {
         const items = await Items.findAll({
             where: {
                 collectionId: req.params.collectionId
-
             }
         });
         res.json(items);
@@ -14,15 +13,27 @@ export const getItems = async (req, res) => {
     }
 }
 
+export const lastItems = async (req, res) => {
+    try {
+        const lastItems = await Items.findAll( {
+            order: [
+                ['createdAt', 'DESC'],
+            ]
+        });
+        res.json(lastItems);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getItem = async (req, res) => {
     try {
-        const items = await Items.findOne({
+        const item = await Items.findOne({
             where: {
                 id: req.params.id
-
             }
         });
-        res.json(items);
+        res.json(item);
     } catch (error) {
         console.log(error);
     }

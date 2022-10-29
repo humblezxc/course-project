@@ -4,32 +4,22 @@
 // use material ui for styling
 
 import React, { useState } from "react";
-import {useNavigate, withRouter} from "react-router-dom";
-// import { makeStyles } from '@mui/styles';
+import {useNavigate} from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-// import { DatePicker } from '@mui/material/x-date-pickers/DatePicker';
-// import { AdapterDayjs } from '@mui/material/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/material/x-date-pickers/LocalizationProvider';
-
 import axios from "axios";
 import Checkbox from "@mui/material/Checkbox";
-import {Numbers} from "@mui/icons-material";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Typography from "@mui/material/Typography";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function CreateItem() {
-    // const useStyles = makeStyles((theme) => ({
-    //     root: {
-    //         '& > *': {
-    //             margin: theme.spacing(1),
-    //             width: '25ch',
-    //         },
-    //     },
-    // }));
 
-    // const classes = useStyles();
     const [itemName, setItemName] = useState("");
     const [digit_1_value, setDigit_1_value] = useState(null);
     const [digit_2_value, setDigit_2_value] = useState(null);
@@ -49,7 +39,7 @@ export default function CreateItem() {
 
     const navigate = useNavigate();
 
-    const onSubmit = async (e) => {
+    const createItem = async (e) => {
         e.preventDefault();
         const collectionId = window.location.pathname.split("/")[2];
 
@@ -74,7 +64,7 @@ export default function CreateItem() {
         };
         try {
             await axios.post(`/api/collections/${collectionId}/items`, newItem);
-            // redirect to /collections after creating a new item
+
             navigate("/collections/" + collectionId);
         } catch (error) {
             if (error.response) {
@@ -84,97 +74,138 @@ export default function CreateItem() {
     };
 
     return (
-        <Container component="main" maxWidth="md">
-            <h1>Create Item</h1>
-            <Box component="form" autoComplete="off" noValidate onSubmit={onSubmit} sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}>
-                <TextField id="standard-basic" label="Item Name" onChange={e => setItemName(e.target.value)} />
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="number" label="Digit 1 Value" onChange={e => setDigit_1_value(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="number" label="Digit 2 Value" onChange={e => setDigit_2_value(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="number" label="Digit 3 Value" onChange={e => setDigit_3_value(e.target.value)} />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="string" label="String 1 Value" onChange={e => setString_1_value(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="string" label="String 2 Value" onChange={e => setString_2_value(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="string" label="String 3 Value" onChange={e => setString_3_value(e.target.value)} />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="text" label="Text 1 Value" onChange={e => setText_1_value(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="text" label="Text 2 Value" onChange={e => setText_2_value(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <TextField id="standard-basic" type="text" label="Text 3 Value" onChange={e => setText_3_value(e.target.value)} />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
-                        <Checkbox id="standard-basic" type="checkbox" label="Boolean 1 Value" onChange={e => setBoolean_1_value(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Checkbox id="standard-basic" type="checkbox" label="Boolean 2 Value" onChange={e => setBoolean_2_value(e.target.value)} />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Checkbox id="standard-basic" type="checkbox" label="Boolean 3 Value" onChange={e => setBoolean_3_value(e.target.value)} />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
-                        {/*<TextField*/}
-                        {/*    id="datetime-local"*/}
-                        {/*    label="Next appointment"*/}
-                        {/*    type="datetime-local"*/}
-                        {/*    sx={{ width: 250 }}*/}
-                        {/*    InputLabelProps={{*/}
-                        {/*        shrink: true,*/}
-                        {/*    }}*/}
-                        {/*        onChange={(newValue) => {*/}
-                        {/*            setDate_1_value(newValue);*/}
-                        {/*        }}*/}
-                        {/*/>*/}
+        <Container maxWidth="sm">
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                <Typography component="h1" variant="h3">
+                    New item
+                </Typography>
+                <Box
+                    component="form"
+                    onSubmit={createItem}
+                    sx={{
+                        mt: 3
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
 
-                        {/*<LocalizationProvider dateAdapter={AdapterDayjs}>*/}
-                        {/*    <DatePicker*/}
-                        {/*        label="Basic example"*/}
-                        {/*        value={date_1_value}*/}
-                        {/*        onChange={(newValue) => {*/}
-                        {/*            setDate_1_value(newValue);*/}
-                        {/*        }}*/}
-                        {/*        renderInput={(params) => <TextField {...params} />}*/}
-                        {/*    />*/}
-                        {/*</LocalizationProvider>*/}
+                    <Grid paddingBottom={2}>
+                        <TextField id="standard-basic" fullWidth label="Item Name" variant="outlined" onChange={e => setItemName(e.target.value)} />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        {/*<DatePicker id="standard-basic" type="date" label="Date 2 Value" onChange={e => setDate_2_value(e.target.value)} renderInput={(params) => <TextField {...params} />}*/}
-                        {/*/>*/}
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6} >
+                            <h3>Integer fields</h3>
+                                <Grid paddingBottom={2}>
+                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number" label="Digit 1 Value" onChange={e => setDigit_1_value(e.target.value)} />
+                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number" label="Digit 2 Value" onChange={e => setDigit_2_value(e.target.value)} />
+                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number" label="Digit 3 Value" onChange={e => setDigit_3_value(e.target.value)} />
+                                </Grid>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <h3>String fields</h3>
+                                <Grid paddingBottom={2}>
+                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label="String 1 Value" onChange={e => setString_1_value(e.target.value)} />
+                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label="String 2 Value" onChange={e => setString_2_value(e.target.value)} />
+                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label="String 3 Value" onChange={e => setString_3_value(e.target.value)} />
+                                </Grid>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        {/*<DatePicker id="standard-basic" type="date" label="Date 3 Value" onChange={e => setDate_3_value(e.target.value)} renderInput={(params) => <TextField {...params} />}*/}
-                        {/*/>*/}
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <h3>Text fields</h3>
+                            <Grid paddingBottom={2}>
+                                <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label="Text 1 Value" onChange={e => setText_1_value(e.target.value)} />
+                                <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label="Text 2 Value" onChange={e => setText_2_value(e.target.value)} />
+                                <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label="Text 3 Value" onChange={e => setText_3_value(e.target.value)} />
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <h3>Date fields</h3>
+                            <Grid paddingBottom={2}>
+                                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                    <DatePicker
+                                        label="Basic example"
+                                        value={date_1_value}
+                                        onChange={e => setDate_1_value(e.target.value)}
+                                        renderInput={(params) => <TextField sx={{mb: 1}}  {...params} />}
+                                    />
+                                </LocalizationProvider>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        sx={{mb: 1}}
+                                        label="Basic example"
+                                        onChange={e => setDate_2_value(e.target.value)}
+                                        renderInput={(params) => <TextField sx={{mb: 1}} {...params} />}
+                                    />
+                                </LocalizationProvider>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DatePicker
+                                        sx={{mb: 1}}
+                                        label="Basic example"
+                                        onChange={e => setDate_3_value(e.target.value)}
+                                        renderInput={(params) => <TextField sx={{mb: 1}} {...params} />}
+                                    />
+                                </LocalizationProvider>
+                                    {/*<TextField*/}
+                                    {/*    id="datetime-local"*/}
+                                    {/*    label="Next appointment"*/}
+                                    {/*    type="datetime-local"*/}
+                                    {/*    sx={{ width: 250 }}*/}
+                                    {/*    InputLabelProps={{*/}
+                                    {/*        shrink: true,*/}
+                                    {/*    }}*/}
+                                    {/*    onChange={(newValue) => {*/}
+                                    {/*        setDate_1_value(newValue);*/}
+                                    {/*    }}*/}
+                                    {/*/>*/}
+
+                                    {/*<LocalizationProvider dateAdapter={AdapterDayjs}>*/}
+                                    {/*    <DatePicker*/}
+                                    {/*        label="Basic example"*/}
+                                    {/*        value={date_1_value}*/}
+                                    {/*        onChange={(newValue) => {*/}
+                                    {/*            setDate_1_value(newValue);*/}
+                                    {/*        }}*/}
+                                    {/*        renderInput={(params) => <TextField {...params} />}*/}
+                                    {/*    />*/}
+
+                                    {/*</LocalizationProvider>*/}
+                                    {/*<DatePicker id="standard-basic" type="date" label="Date 2 Value" onChange={e => setDate_2_value(e.target.value)} renderInput={(params) => <TextField {...params} />}*/}
+                                    {/*/>*/}
+                                    {/*<DatePicker id="standard-basic" type="date" label="Date 3 Value" onChange={e => setDate_3_value(e.target.value)} renderInput={(params) => <TextField {...params} />}*/}
+                                    {/*/>*/}
+                            </Grid>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Button variant="contained" color="primary" type="submit">
-                    Create Item
-                </Button>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <h3>Boolean fields</h3>
+                            <FormControlLabel sx={{mb: 1}} fullWidth control={<Checkbox id="standard-basic" type="checkbox" onChange={e => setBoolean_1_value(e.target.value)}/>} label="Boolean 1 Value"/>
+                            <FormControlLabel sx={{mb: 1}} fullWidth control={<Checkbox id="standard-basic" type="checkbox" label="Boolean 2 Value" onChange={e => setBoolean_2_value(e.target.value)}/>} label="Boolean 2 Value" />
+                            <FormControlLabel fullWidth control={<Checkbox id="standard-basic" type="checkbox" label="Boolean 3 Value" onChange={e => setBoolean_3_value(e.target.value)}/>} label="Boolean 3 Value" />
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={12}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 3 }}
+                            >
+                                Create item
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Box>
             </Box>
         </Container>
     )
