@@ -1,10 +1,20 @@
 import Collections from "../models/CollectionModel.js";
 import Users from "../models/UserModel.js";
-import Items from "../models/Item.js";
+import Items from "../models/ItemModel.js";
 
 export const getCollection = async (req, res) => {
     try {
-        const collection = await Collections.findByPk(req.params.id);
+        const collection = await Collections.findByPk(req.params.id,             { include: [
+                {
+                    model: Users,
+                    require: true
+                },
+                {
+                    model: Items,
+                    require: true
+                },
+            ]
+        });
         if (collection) {
             res.status(200).send(collection);
         } else {

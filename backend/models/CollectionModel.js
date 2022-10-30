@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
-import Items from "./Item.js";
+import Items from "./ItemModel.js";
 import Users from "./UserModel.js";
 
 const { DataTypes } = Sequelize;
@@ -114,9 +114,8 @@ const Collections = db.define('collections',{
 
 (async () => {
     await db.sync();
+    Collections.belongsTo(Users);
+    Collections.hasMany(Items);
 })();
-
-Collections.belongsTo(Users);
-Collections.hasMany(Items);
 
 export default Collections;

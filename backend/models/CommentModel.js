@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
-import Items from "./Item.js";
-import Users from "./UserModel.js";
+import Items from "./ItemModel.js";
+import UserModel from "./UserModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -21,9 +21,9 @@ const Comments = db.define('comments',{
 
 (async () => {
     await db.sync();
+    Comments.belongsTo(UserModel);
+    Comments.belongsTo(Items);
 })();
 
-Comments.belongsTo(Users);
-Comments.belongsTo(Items);
-
 export default Comments;
+

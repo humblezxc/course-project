@@ -21,11 +21,12 @@ export default function CollectionShow() {
     const collectionId = window.location.pathname.split("/")[2];
 
     useEffect(() => {
-        axios.get("/api/collections/" + collectionId)
-            .then(res => {
-                setCollection(res.data);
-            })
-            .catch(err => console.log(err));
+        // axios.get("/api/collections/" + collectionId)
+        //     .then(res => {
+        //         setCollection(res.data);
+        //         setItems(res.data.items);
+        //     })
+        //     .catch(err => console.log(err));
     }, []);
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export default function CollectionShow() {
     const getItems = () => {
         axios.get("/api/collections/" + collectionId + "/items")
             .then(res => {
-                setItems(res.data);
+                // setItems(res.data);
             })
             .catch(err => console.log(err));
     }

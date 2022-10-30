@@ -67,10 +67,10 @@ const Items = db.define('items',{
 
 (async () => {
     await db.sync();
+    Items.hasMany(Comments);
+    Items.belongsTo(Collections);
+    Items.belongsTo(Users);
 } )();
 
-Items.belongsTo(Collections);
-Items.belongsTo(Users);
-Items.hasMany(Comments);
-
 export default Items;
+

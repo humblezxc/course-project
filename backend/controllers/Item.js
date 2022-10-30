@@ -1,4 +1,4 @@
-import Items from "../models/Item.js";
+import Items from "../models/ItemModel.js";
 import Collections from "../models/CollectionModel.js";
 import Comments from "../models/CommentModel.js";
 import Users from "../models/UserModel.js";

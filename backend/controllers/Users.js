@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import Collections from "../models/CollectionModel.js";
-import Items from "../models/Item.js";
+import Items from "../models/ItemModel.js";
 import Comments from "../models/CommentModel.js";
 dotenv.config();
 
