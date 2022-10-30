@@ -8,10 +8,50 @@ import Typography from "@mui/material/Typography";
 import Checkbox from '@mui/material/Checkbox';
 import Button from "@mui/material/Button";
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import jwt_decode from 'jwt-decode';
 
 export default function CreateCollection() {
+    const [token, setToken] = useState('');
+    const [expire, setExpire] = useState('');
+    const [name, setName] = useState('');
+
+    const axiosJWT = axios.create();
+
+    useEffect(() => {
+        refreshToken();
+    }, []);
+
+    const refreshToken = async () => {
+        try {
+            const response = await axios.get('/api/token');
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setName(decoded.name);
+            setExpire(decoded.exp);
+        } catch (error) {
+            if (error.response) {
+                navigate("/");
+            }
+        }
+    }
+
+    axiosJWT.interceptors.request.use(async (config) => {
+        const currentDate = new Date();
+        if (expire * 1000 < currentDate.getTime()) {
+            const response = await axios.get('/api/token');
+            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+            setToken(response.data.accessToken);
+            const decoded = jwt_decode(response.data.accessToken);
+            setName(decoded.name);
+            setExpire(decoded.exp);
+        }
+        return config;
+    }, (error) => {
+        return Promise.reject(error);
+    });
+
     const [collectionName, setCollectionName] = useState('');
     // const [teg, setTeg] = useState('');
     const [description, setDescription] = useState('');
@@ -74,8 +114,12 @@ export default function CreateCollection() {
             (obj, item) => Object.assign(obj, { [`${item.key}_name`]: item.value, [`${item.key}_enabled`]: item.enabled }), {});
 
         try {
-            await axios.post("/api/collections", { ...params,
+            await axiosJWT.post("/api/collections", { ...params,
                 ...object
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             });
             navigate("/");
         } catch (error) {

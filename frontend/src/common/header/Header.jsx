@@ -12,6 +12,7 @@ import Menu from '@mui/material/Menu';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -53,17 +54,33 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(store) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const navigate = useNavigate();
+    const user = localStorage.getItem('token');
 
     const routeLogin = () => {
         navigate("/login");
     }
+    const Logout = async () => {
+        try {
+            await axios.delete("/api/logout")
+            localStorage.setItem('user', null)
+            localStorage.setItem('token', null)
+
+            navigate("/login");
+
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.data.msg);
+            }
+        }
+    }
+
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -151,6 +168,18 @@ export default function PrimarySearchAppBar() {
         </Menu>
     );
 
+    const renderAuthButton = () => {
+        if (user === 'null') {
+            return <Button onClick={routeLogin} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                Login
+            </Button>;
+        } else {
+            return <Button onClick={Logout} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                Logout
+            </Button>;
+        }
+    }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar
@@ -190,9 +219,7 @@ export default function PrimarySearchAppBar() {
                             Home
                         </Link>
                     </nav>
-                    <Button onClick={routeLogin} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-                        Login
-                    </Button>
+                    {renderAuthButton()}
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}

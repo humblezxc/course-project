@@ -1,4 +1,6 @@
 import Comments from "../models/CommentModel.js";
+import Items from "../models/ItemModel.js";
+import Users from "../models/UserModel.js";
 
 export const getComments = async (req, res) => {
     try {
@@ -6,6 +8,16 @@ export const getComments = async (req, res) => {
             where: {
                 itemId: req.params.itemId
             },
+            include: [
+                {
+                    model: Items,
+                    required: true
+                },
+                {
+                    model:  Users,
+                    required: true
+                },
+            ],
             order: [
                 ['createdAt', 'DESC'],
             ]

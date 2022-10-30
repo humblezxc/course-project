@@ -14,7 +14,7 @@ export default function CommentForm({handleSubmit, submitLabel}) {
         setText("");
     }
     return(
-        <Box type={"form"} onSubmit={sendComment}
+        <Box type={"form"}
             sx={{
                 pt:2,
                 pb: 2,
@@ -31,7 +31,7 @@ export default function CommentForm({handleSubmit, submitLabel}) {
                 />
             </Grid>
             <Grid mt="1em">
-                <Button variant="outlined" disabled={isTextareaDisabled} type={"submit"}>{submitLabel}</Button>
+                <Button variant="outlined" disabled={isTextareaDisabled} onClick={sendComment}>{submitLabel}</Button>
             </Grid>
         </Box>
     );

@@ -9,8 +9,13 @@ import Grid from "@mui/material/Grid";
 
 export default function CollectionIndex() {
     const [collection, setCollection] = useState([]);
+
     useEffect(() => {
-        axios.get("/api/collections")
+        axios.get("/api/collections", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
             .then(res => {
                 setCollection(res.data);
             })

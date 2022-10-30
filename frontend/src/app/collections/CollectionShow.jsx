@@ -21,15 +21,11 @@ export default function CollectionShow() {
     const collectionId = window.location.pathname.split("/")[2];
 
     useEffect(() => {
-        axios.get("/api/collections/" + collectionId)
-            .then(res => {
+        axios.get("/api/collections/" + collectionId).then(res => {
                 setCollection(res.data);
+                setItems(res.data.items);
             })
             .catch(err => console.log(err));
-    }, []);
-
-    useEffect(() => {
-        getItems();
     }, []);
 
     const getItems = () => {

@@ -2,12 +2,30 @@ import Users from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import Collections from "../models/CollectionModel.js";
+import Items from "../models/ItemModel.js";
+import Comments from "../models/CommentModel.js";
 dotenv.config();
 
 export const getUsers = async(req, res) => {
     try {
         const users = await Users.findAll({
-            attributes:['id','firstName','lastName','email']
+            attributes:['id','firstName','lastName','email'],
+            include:
+                [
+                    {
+                        model: Collections,
+                        required: true
+                    },
+                    {
+                        model: Items,
+                        required: true
+                    },
+                    {
+                        model: Comments,
+                        required: true
+                    },
+                ]
         });
         res.json(users);
     } catch (error) {
@@ -47,7 +65,7 @@ export const Login = async(req, res) => {
         const lastName = user[0].lastName;
         const email = user[0].email;
         const accessToken = jwt.sign({userId, firstName, lastName, email}, process.env.ACCESS_TOKEN_SECRET,{
-            expiresIn: '15s'
+            expiresIn: '1d'
         });
         const refreshToken = jwt.sign({userId, firstName, lastName, email}, process.env.REFRESH_TOKEN_SECRET,{
             expiresIn: '1d'
@@ -61,7 +79,7 @@ export const Login = async(req, res) => {
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000
         });
-        res.json({ accessToken });
+        res.json({ accessToken, user: user[0] });
     } catch (error) {
         res.status(404).json({msg:"Email not found"});
     }
