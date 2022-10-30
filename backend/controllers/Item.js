@@ -20,7 +20,7 @@ export const getItems = async (req, res) => {
                 },
                 {
                     model: Comments,
-                    required: true
+                    required: false
                 },
             ]
         });

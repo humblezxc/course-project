@@ -65,7 +65,7 @@ export const Login = async(req, res) => {
         const lastName = user[0].lastName;
         const email = user[0].email;
         const accessToken = jwt.sign({userId, firstName, lastName, email}, process.env.ACCESS_TOKEN_SECRET,{
-            expiresIn: '15s'
+            expiresIn: '1d'
         });
         const refreshToken = jwt.sign({userId, firstName, lastName, email}, process.env.REFRESH_TOKEN_SECRET,{
             expiresIn: '1d'
@@ -79,7 +79,7 @@ export const Login = async(req, res) => {
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000
         });
-        res.json({ accessToken });
+        res.json({ accessToken, user: user[0] });
     } catch (error) {
         res.status(404).json({msg:"Email not found"});
     }

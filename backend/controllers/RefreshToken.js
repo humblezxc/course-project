@@ -22,9 +22,9 @@ export const refreshToken = async(req, res) => {
             const accessToken = jwt.sign(
                 {userId, firstName, lastName, email},
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '15s' }
+                { expiresIn: '120s' }
             );
-            res.json({ accessToken });
+            res.json(({ accessToken, user: user[0] }));
         });
     } catch (error) {
         console.log(error);

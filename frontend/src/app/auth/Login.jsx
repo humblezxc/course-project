@@ -13,10 +13,10 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 
+
 const Login = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [msg, setMsg] = React.useState('');
     const navigate = useNavigate();
 
     const Auth = async (e) => {
@@ -25,13 +25,21 @@ const Login = () => {
             await axios.post('/api/login', {
                 email: email,
                 password: password
+            })
+             .then((response) => {
+                 localStorage.setItem('token', response.data.accessToken)
+                 localStorage.setItem('user', response.data.user)
+
+                return response.data;
             });
 
             navigate("/");
         } catch (error) {
+            localStorage.setItem('token', null)
+            localStorage.setItem('user', null)
+
             if (error.response) {
                 console.log(error.response.data.msg);
-                setMsg(error.response.data.msg);
             }
         }
     }
@@ -60,7 +68,6 @@ const Login = () => {
                         Sign in
                     </Typography>
                     <Box component="form" onSubmit={Auth} noValidate sx={{ mt: 1 }}>
-                        {msg}
                         <TextField
                             margin="normal"
                             required

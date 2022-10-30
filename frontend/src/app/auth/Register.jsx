@@ -21,7 +21,6 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
-    const [msg, setMsg] = useState('');
     const navigate = useNavigate();
 
     const Register = async (e) => {
@@ -37,7 +36,7 @@ const Register = () => {
             navigate("/login");
         } catch (error) {
             if (error.response) {
-                setMsg(error.response.data.msg);
+                console.log(error.response.data.msg);
             }
         }
     }
@@ -63,7 +62,6 @@ const Register = () => {
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign up
-                        {msg}
                     </Typography>
                     <Box component="form" noValidate onSubmit={Register} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
