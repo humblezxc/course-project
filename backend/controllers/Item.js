@@ -1,11 +1,28 @@
 import Items from "../models/Item.js";
+import Collections from "../models/CollectionModel.js";
+import Comments from "../models/CommentModel.js";
+import Users from "../models/UserModel.js";
 
 export const getItems = async (req, res) => {
     try {
         const items = await Items.findAll({
             where: {
                 collectionId: req.params.collectionId
-            }
+            },
+            include: [
+                {
+                    model: Collections,
+                    required: true
+                },
+                {
+                    model: Users,
+                    required: true
+                },
+                {
+                    model: Comments,
+                    required: true
+                },
+            ]
         });
         res.json(items);
     } catch (error) {

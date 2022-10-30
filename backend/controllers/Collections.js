@@ -1,4 +1,6 @@
 import Collections from "../models/CollectionModel.js";
+import Users from "../models/UserModel.js";
+import Items from "../models/Item.js";
 
 export const getCollection = async (req, res) => {
     try {
@@ -20,7 +22,17 @@ export const getCollections = async (req, res) => {
                 'string_1_enabled', 'string_1_name', 'string_2_enabled', 'string_2_name', 'string_3_enabled', 'string_3_name',
                 'text_1_enabled', 'text_1_name', 'text_2_enabled', 'text_2_name', 'text_3_enabled', 'text_3_name',
                 'boolean_1_enabled', 'boolean_1_name', 'boolean_2_enabled', 'boolean_2_name', 'boolean_3_enabled', 'boolean_3_name',
-                'date_1_enabled', 'date_1_name', 'date_2_enabled', 'date_2_name', 'date_3_enabled', 'date_3_name']
+                'date_1_enabled', 'date_1_name', 'date_2_enabled', 'date_2_name', 'date_3_enabled', 'date_3_name'],
+            include: [
+                {
+                    model: Users,
+                    require: true
+                },
+                {
+                    model: Items,
+                    require: true
+                },
+            ]
         })
         res.json(collections)
     }catch (error){

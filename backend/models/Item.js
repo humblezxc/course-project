@@ -1,5 +1,8 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
+import Collections from "./CollectionModel.js";
+import Comments from "./CommentModel.js";
+import Users from "./UserModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -65,5 +68,9 @@ const Items = db.define('items',{
 (async () => {
     await db.sync();
 } )();
+
+Items.belongsTo(Collections);
+Items.belongsTo(Users);
+Items.hasMany(Comments);
 
 export default Items;
