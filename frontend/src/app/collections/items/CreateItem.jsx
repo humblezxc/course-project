@@ -63,7 +63,11 @@ export default function CreateItem() {
             date_3_value
         };
         try {
-            await axios.post(`/api/collections/${collectionId}/items`, newItem);
+            await axios.post(`/api/collections/${collectionId}/items`, newItem, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
 
             navigate("/collections/" + collectionId);
         } catch (error) {

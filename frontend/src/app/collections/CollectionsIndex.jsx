@@ -9,7 +9,6 @@ import Grid from "@mui/material/Grid";
 
 export default function CollectionIndex() {
     const [collection, setCollection] = useState([]);
-
     useEffect(() => {
         axios.get("/api/collections", {
             headers: {
@@ -23,6 +22,20 @@ export default function CollectionIndex() {
 
     }, []);
 
+    const deleteCollection = async (collectionId) => {
+        try {
+            await axios.delete("/api/collections/" + collectionId, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            window.location.reload();
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.data.msg);
+            }
+        }
+    };
     return (
         <div>
             <Box
@@ -67,7 +80,7 @@ export default function CollectionIndex() {
                                             <Button size="small" variant="outlined" color="warning" href={routes.COLLECTIONS + "/" + collection.id + "/edit"}>
                                                 Edit
                                             </Button>
-                                            <Button  size="small" variant="outlined" color="error" href={routes.COLLECTIONS + "/" + collection.id + "/delete"}>
+                                            <Button  size="small" variant="outlined" color="error" onClick={() => deleteCollection(collection.id)}>
                                                 Delete
                                             </Button>
                                         </CardActions>

@@ -32,7 +32,7 @@ export default function CreateCollection() {
             setExpire(decoded.exp);
         } catch (error) {
             if (error.response) {
-                navigate("/");
+                console.log(error)
             }
         }
     }
@@ -121,7 +121,7 @@ export default function CreateCollection() {
                     Authorization: `Bearer ${token}`
                 }
             });
-            navigate("/");
+            navigate("/collections");
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data.msg);
