@@ -68,3 +68,19 @@ export const NewCollection = async(req, res) => {
         })
     }
 }
+export const deleteCollection = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deleteRowCount = await Collections.destroy({
+            where: {
+                id
+            }
+        });
+        res.json({
+            message: 'Collection deleted successfully',
+            count: deleteRowCount
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}

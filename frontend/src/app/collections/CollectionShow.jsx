@@ -14,12 +14,13 @@ import { Typography } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Box from "@mui/material/Box";
+import {useNavigate} from "react-router-dom";
 
 export default function CollectionShow() {
     const [collection, setCollection] = useState([]);
     const [items, setItems] = useState([]);
     const collectionId = window.location.pathname.split("/")[2];
-
+    const navigate = useNavigate()
     useEffect(() => {
         axios.get("/api/collections/" + collectionId).then(res => {
                 setCollection(res.data);
@@ -38,8 +39,26 @@ export default function CollectionShow() {
 
     const deleteItem = async (itemId) => {
         try {
-            await axios.delete("/api/collections/" + collectionId + "/items/" + itemId)
+            await axios.delete("/api/collections/" + collectionId + "/items/" + itemId, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             getItems();
+        } catch (error) {
+            if (error.response) {
+                console.log(error.response.data.msg);
+            }
+        }
+    };
+    const deleteCollection = async (collectionId) => {
+        try {
+            await axios.delete("/api/collections/" + collectionId, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            navigate("/collections");
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data.msg);
@@ -91,7 +110,7 @@ export default function CollectionShow() {
 
                         >
                             <Button  key="edit" variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/edit"}>Edit collection</Button>
-                            <Button key="delete" variant="outlined" href={routes.COLLECTIONS + "/" + collection.id + "/delete"}>Delete collection</Button>
+                            <Button key="delete" variant="outlined" onClick={() => deleteCollection(collection.id)}>Delete collection</Button>
                             <Button key="create_item" variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/items/create"}>Add Item</Button>
                         </Stack>
                     </Container>
