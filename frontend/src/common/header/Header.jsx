@@ -11,7 +11,8 @@ import axios from "axios";
 
 export default function ApplicationBar() {
     const navigate = useNavigate();
-    const user = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
 
     const routeDashboard = () => {
         navigate("/dashboard");
@@ -37,7 +38,7 @@ export default function ApplicationBar() {
         }
     }
     const Dashboard = () => {
-        if (user.isAdmin ){
+        if (user?.isAdmin ){
             return <Link
                 variant="button"
                 color="text.primary"
@@ -48,8 +49,9 @@ export default function ApplicationBar() {
             </Link>
         }
     }
+
     const userCollection = () => {
-        if (user.isAdmin ){
+        if (user){
             return <Link
                 variant="button"
                 color="text.primary"
@@ -62,7 +64,7 @@ export default function ApplicationBar() {
     }
 
     const renderAuthButton = () => {
-        if (user === 'null') {
+        if (token === 'null') {
             return <Button onClick={routeLogin} variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                 Login
             </Button>;
@@ -87,13 +89,14 @@ export default function ApplicationBar() {
                     </Typography>
                     <nav>
                         {Dashboard()}
+                        {userCollection()}
                         <Link
                             variant="button"
                             color="text.primary"
-                            href="/collections"
+                            href="/collections/all"
                             sx={{ my: 1, mx: 1.5 }}
                         >
-                            My collections
+                            All collections
                         </Link>
                         <Link
                             variant="button"

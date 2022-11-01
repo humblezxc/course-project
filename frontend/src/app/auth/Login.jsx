@@ -28,7 +28,7 @@ const Login = () => {
             })
              .then((response) => {
                  localStorage.setItem('token', response.data.accessToken)
-                 localStorage.setItem('user', response.data.user)
+                 localStorage.setItem('user', JSON.stringify(response.data.user))
 
                 return response.data;
             });
