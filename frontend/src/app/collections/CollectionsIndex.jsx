@@ -77,9 +77,6 @@ export default function CollectionIndex() {
                                     </Grid>
                                     <Grid item xs={12} sm={1}>
                                         <CardActions>
-                                            <Button size="small" variant="outlined" color="warning" href={routes.COLLECTIONS + "/" + collection.id + "/edit"}>
-                                                Edit
-                                            </Button>
                                             <Button  size="small" variant="outlined" color="error" onClick={() => deleteCollection(collection.id)}>
                                                 Delete
                                             </Button>

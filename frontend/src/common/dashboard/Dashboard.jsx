@@ -182,8 +182,8 @@ const Dashboard = () => {
 
                     >
                         <Button key="delete" variant="contained" onClick={destroyUsers}>Delete user</Button>
-                        <Button key="edit" variant="contained" onClick={blockUsers}>Block user</Button>
-                        <Button key="edit" variant="outlined" onClick={setAdminUsers} >Set admin</Button>
+                        <Button key="block" variant="contained" onClick={blockUsers}>Block user</Button>
+                        <Button key="admin" variant="outlined" onClick={setAdminUsers} >Set admin</Button>
                     </Stack>
                 </Container>
             </Box>

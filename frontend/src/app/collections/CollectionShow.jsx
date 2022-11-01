@@ -71,7 +71,6 @@ export default function CollectionShow() {
         if (user && (user.id === collection.userId || user.isAdmin === true)) {
             return (
                 <>
-                <Button key="edit" variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/edit"}>Edit collection</Button>
                 <Button key="delete" variant="outlined" onClick={() => deleteCollection(collection.id)}>Delete collection</Button>
                 <Button key="create_item" variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/items/create"}>Add Item</Button>
                 </>
@@ -84,7 +83,6 @@ export default function CollectionShow() {
         if (user && (user.id === collection.userId || user.isAdmin === true)) {
             return (
                 <>
-                    <TableCell align="right"><Button variant="outlined" href={routes.COLLECTIONS + "/" + collection.id + "/" + item.id + "/edit"}>Edit</Button></TableCell>
                     <TableCell align="right"><Button variant="contained" onClick={() => deleteItem(item.id)}>Delete</Button></TableCell>
                 </>
             );
@@ -95,7 +93,6 @@ export default function CollectionShow() {
         if (user && (user.id === collection.userId || user.isAdmin === true)) {
             return (
                 <>
-                    <TableCell align="right">Edit</TableCell>
                     <TableCell align="right">Delete</TableCell>
                 </>
             );
