@@ -18,7 +18,7 @@ export default function Comment({comment}) {
             <container maxWidth="sm">
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                        <TextField fullWidth value="Username" variant="standard" InputProps={{
+                        <TextField fullWidth value={comment.user.firstName} variant="standard" InputProps={{
                             readOnly: true,
                         }}/>
                     </Grid>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Router, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Login from "../../app/auth/Login";
 import Home from "../../app/home/Home";
 import Register from "../../app/auth/Register";
@@ -9,6 +9,7 @@ import CollectionShow from "../../app/collections/CollectionShow"
 import CreateItem from "../../app/collections/items/CreateItem"
 import ItemShow from "../../app/collections/items/ItemShow";
 import routes from "../../shared/constants/routes";
+import Dashboard from "../dashboard/Dashboard";
 
 export default function AppRoutes() {
     return (
@@ -21,6 +22,7 @@ export default function AppRoutes() {
             <Route path={routes.COLLECTION_CREATE} element={<CreateCollection />} />
             <Route path={routes.ITEM_CREATE} element={<CreateItem/>} />
             <Route path={routes.ITEM_SHOW} element={<ItemShow/>} />
+            <Route path={routes.DASHBOARD} element={<Dashboard/>} />
         </Routes>
     );
 }

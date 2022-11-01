@@ -10,20 +10,20 @@ dotenv.config();
 export const getUsers = async(req, res) => {
     try {
         const users = await Users.findAll({
-            attributes:['id','firstName','lastName','email'],
+            attributes:['id','firstName','lastName','email', 'isAdmin', 'isBlocked'],
             include:
                 [
                     {
                         model: Collections,
-                        required: true
+                        required: false
                     },
                     {
                         model: Items,
-                        required: true
+                        required: false
                     },
                     {
                         model: Comments,
-                        required: true
+                        required: false
                     },
                 ]
         });
@@ -102,4 +102,39 @@ export const Logout = async(req, res) => {
     });
     res.clearCookie('refreshToken');
     return res.sendStatus(200);
+}
+
+export const Admin = async(req, res) => {
+    const user = await Users.findOne({
+        where:{
+            id: req.params.id
+        }
+    });
+
+    user.update({ isAdmin: !user.isAdmin })
+    return res.sendStatus(204);
+}
+export const deleteUser = async(req, res) => {
+    const user = await Users.findOne({
+        where:{
+            id: req.params.id
+        }
+    });
+
+    user.destroy();
+    return res.sendStatus(204);
+}
+
+export const blockUser = async(req, res) => {
+    const user = await Users.findOne({
+        where:{
+            id: req.params.id
+        }
+    });
+
+    user.update({ isBlocked: !user.isBlocked })
+    if (user.isBlocked) {
+        user.update({ refresh_token: null })
+    }
+    return res.sendStatus(204);
 }

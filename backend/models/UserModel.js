@@ -21,6 +21,12 @@ const Users = db.define('users',{
     },
     refresh_token:{
         type: DataTypes.TEXT
+    },
+    isAdmin:{
+        type: DataTypes.BOOLEAN
+    },
+    isBlocked:{
+        type: DataTypes.BOOLEAN
     }
 },{
     freezeTableName:true

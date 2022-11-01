@@ -26,9 +26,13 @@ export const getCollection = async (req, res) => {
 }
 
 export const getCollections = async (req, res) => {
+    console.log(req.isAdmin)
+    const user = await Users.findByPk(req.userId)
+    const collectionAccess = user.isAdmin ? {} : { userId: user.id }
+
     try {
         const collections = await Collections.findAll({
-            where: { userId: req.userId },
+            where: collectionAccess,
             attributes: ['id', 'collectionName', 'description', 'topic', 'digit_1_enabled', 'digit_1_name', 'digit_2_enabled', 'digit_2_name', 'digit_3_enabled', 'digit_3_name',
                 'string_1_enabled', 'string_1_name', 'string_2_enabled', 'string_2_name', 'string_3_enabled', 'string_3_name',
                 'text_1_enabled', 'text_1_name', 'text_2_enabled', 'text_2_name', 'text_3_enabled', 'text_3_name',
