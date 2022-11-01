@@ -129,17 +129,7 @@ export default function Home() {
                                         <Grid container spacing={2}>
                                             <Grid item xs={12} sm={9}>
                                                 <CardActions>
-                                                    <Button size="small" href={routes.COLLECTIONS + "/" + collection.id}>Learn More</Button>
-                                                </CardActions>
-                                            </Grid>
-                                            <Grid item xs={12} sm={1}>
-                                                <CardActions>
-                                                    <Button size="small" variant="outlined" color="warning" href={routes.COLLECTIONS + "/" + collection.id + "/edit"}>
-                                                        Edit
-                                                    </Button>
-                                                    <Button  size="small" variant="outlined" color="error" href={routes.COLLECTIONS + "/" + collection.id + "/delete"}>
-                                                        Delete
-                                                    </Button>
+                                                    <Button size="small" href={routes.COLLECTIONS + "/" + collection.id}>Show More</Button>
                                                 </CardActions>
                                             </Grid>
                                         </Grid>

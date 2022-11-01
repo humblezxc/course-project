@@ -53,7 +53,7 @@ export default function CollectionsAll() {
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={9}>
                                         <CardActions>
-                                            <Button size="small" href={routes.COLLECTIONS + "/" + collection.id}>Learn More</Button>
+                                            <Button size="small" href={routes.COLLECTIONS + "/" + collection.id}>Show More</Button>
                                         </CardActions>
                                     </Grid>
                                 </Grid>
