@@ -77,7 +77,6 @@ export default function CreateCollection() {
         { key: 'date_3', enabled: false, value: '' },
     ]);
     const handleToggle = ({ target }) => {
-        console.log(target)
         setAdditionFields(current =>
             current.map(obj => {
                 if (obj.key === target.name) {

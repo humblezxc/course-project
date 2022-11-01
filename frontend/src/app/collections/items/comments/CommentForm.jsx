@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 export default function CommentForm({handleSubmit, submitLabel}) {
     const [text, setText] = useState('')
     const isTextareaDisabled = text.length === 0;
-    console.log(text)
+
     const sendComment = (e) => {
         e.preventDefault();
         handleSubmit(text);

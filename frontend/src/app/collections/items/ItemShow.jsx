@@ -19,7 +19,6 @@ export default function ItemShow () {
             }
         )
     );
-    console.log(enabledFields)
 
     useEffect(() => {
         axios.get("/api/collections/" + collectionId + "/items/" + itemId)

@@ -38,7 +38,6 @@ export const newComments = async (req, res) => {
             })
         }
     } catch (error) {
-        console.log(error);
         res.status(500).json({
             message: 'Something goes wrong',
             data: {}
