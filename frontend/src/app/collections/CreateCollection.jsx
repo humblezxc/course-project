@@ -53,7 +53,6 @@ export default function CreateCollection() {
     });
 
     const [collectionName, setCollectionName] = useState('');
-    // const [teg, setTeg] = useState('');
     const [description, setDescription] = useState('');
     const [additionFields, setAdditionFields] = React.useState([
         { key: 'digit_1', enabled: false, value: ''},
@@ -106,7 +105,6 @@ export default function CreateCollection() {
         e.preventDefault();
         const params = {
             collectionName: collectionName,
-            // teg: teg,
             description: description
         }
         const object = additionFields.reduce(
