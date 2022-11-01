@@ -1,10 +1,12 @@
 import Collections from "../models/CollectionModel.js";
 import Users from "../models/UserModel.js";
 import Items from "../models/ItemModel.js";
+import * as sequelize from "sequelize";
 
 export const getCollection = async (req, res) => {
     try {
-        const collection = await Collections.findByPk(req.params.id,             { include: [
+        const collection = await Collections.findByPk(req.params.id, {
+            include: [
                 {
                     model: Users,
                     require: true
@@ -22,6 +24,57 @@ export const getCollection = async (req, res) => {
         }
     } catch (error) {
         res.status(500).send(error.message);
+    }
+}
+
+export const getAllCollections = async (req, res) => {
+    try {
+        const collections = await Collections.findAll({
+            attributes: ['id', 'collectionName', 'description'],
+            include: [
+                {
+                    model: Users,
+                    require: true
+                },
+                {
+                    model: Items,
+                    require: true
+                }
+            ],
+            order: [
+                ['createdAt', 'DESC'],
+            ]
+        })
+        res.json(collections)
+    }catch (error){
+        console.log(error);
+    }
+}
+
+export const getBiggerCollections = async (req, res) => {
+    try {
+        const collections = await Collections.findAll({
+            attributes: [
+                'id', 'collectionName', 'description',
+                [sequelize.fn("COUNT", sequelize.col("items.collectionId")), "itemsCount"]
+            ],
+            include: [
+                {
+                    model: Users,
+                    require: true
+                },
+                {
+                    model: Items,
+                    require: true
+                },
+            ],
+            group: ['items.collectionId'],
+            order: [['itemsCount', 'DESC']]
+        })
+        console.log(collections.slice(0,5))
+        res.json(collections)
+    }catch (error){
+        console.log(error);
     }
 }
 
@@ -46,7 +99,10 @@ export const getCollections = async (req, res) => {
                 {
                     model: Items,
                     require: true
-                },
+                }
+            ],
+            order: [
+                ['createdAt', 'DESC'],
             ]
         })
         res.json(collections)
