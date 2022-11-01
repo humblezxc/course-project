@@ -33,9 +33,20 @@ export const getItems = async (req, res) => {
 export const lastItems = async (req, res) => {
     try {
         const lastItems = await Items.findAll( {
+            include: [
+                {
+                    model: Collections,
+                    required: false
+                },
+                {
+                    model: Users,
+                    required: false
+                },
+            ],
             order: [
                 ['createdAt', 'DESC'],
-            ]
+            ],
+            limit: 5
         });
         res.json(lastItems);
     } catch (error) {
@@ -48,7 +59,17 @@ export const getItem = async (req, res) => {
         const item = await Items.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            include: [
+                {
+                    model: Collections,
+                    required: true
+                },
+                {
+                    model: Users,
+                    required: true
+                },
+            ]
         });
         res.json(item);
     } catch (error) {
@@ -58,8 +79,7 @@ export const getItem = async (req, res) => {
 
 export const newItem = async (req, res) => {
     try {
-        // const userId = req.user.userId;
-        const userId = 1;
+        const userId = req.userId;
 
         let newItem = await Items.create({ ...req.body, userId });
 

@@ -10,7 +10,8 @@ const routes = {
     ITEM_SHOW: "/collections/:collectionId/items/:itemId",
     ITEM_EDIT: "/collections/:collectionId/items/:itemId/edit",
     ITEM_DELETE: "/collections/:collectionId/items/:itemId/delete",
-    DASHBOARD: "/dashboard"
+    DASHBOARD: "/dashboard",
+    ALL_COLLECTIONS: "/collections/all"
 };
 
 export default routes;

@@ -3,7 +3,7 @@
 // do not use class based components for this, use functional components with hooks
 // use material ui for styling
 
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
@@ -19,6 +19,15 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function CreateItem() {
+    const [collection, setCollection] = useState([]);
+    const collectionId = window.location.pathname.split("/")[2];
+
+    useEffect(() => {
+        axios.get("/api/collections/" + collectionId).then(res => {
+            setCollection(res.data);
+        })
+            .catch(err => console.log(err));
+    }, []);
 
     const [itemName, setItemName] = useState("");
     const [digit_1_value, setDigit_1_value] = useState(null);
@@ -100,102 +109,53 @@ export default function CreateItem() {
                     autoComplete="off"
                 >
 
-                    <Grid paddingBottom={2}>
+                    <Grid paddingBottom={10}>
                         <TextField id="standard-basic" fullWidth label="Item Name" variant="outlined" onChange={e => setItemName(e.target.value)} />
                     </Grid>
 
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} >
-                            <h3>Integer fields</h3>
-                                <Grid paddingBottom={2}>
-                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number" label="Digit 1 Value" onChange={e => setDigit_1_value(e.target.value)} />
-                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number" label="Digit 2 Value" onChange={e => setDigit_2_value(e.target.value)} />
-                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number" label="Digit 3 Value" onChange={e => setDigit_3_value(e.target.value)} />
-                                </Grid>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <h3>String fields</h3>
-                                <Grid paddingBottom={2}>
-                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label="String 1 Value" onChange={e => setString_1_value(e.target.value)} />
-                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label="String 2 Value" onChange={e => setString_2_value(e.target.value)} />
-                                    <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label="String 3 Value" onChange={e => setString_3_value(e.target.value)} />
-                                </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <h3>Text fields</h3>
-                            <Grid paddingBottom={2}>
-                                <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label="Text 1 Value" onChange={e => setText_1_value(e.target.value)} />
-                                <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label="Text 2 Value" onChange={e => setText_2_value(e.target.value)} />
-                                <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label="Text 3 Value" onChange={e => setText_3_value(e.target.value)} />
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <h3>Date fields</h3>
-                            <Grid paddingBottom={2}>
-                                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                    <Grid>
+
+                                    { collection.digit_1_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number"
+                                                label={collection.digit_1_name} onChange={e => setDigit_1_value(e.target.value)}/>}
+                                    { collection.digit_2_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number"
+                                                label={collection.digit_2_name}
+                                                onChange={e => setDigit_2_value(e.target.value)}/>}
+                                    { collection.digit_3_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="number" label={collection.digit_3_name} onChange={e => setDigit_3_value(e.target.value)} />}
+
+                                    { collection.string_1_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label={collection.string_1_name} onChange={e => setString_1_value(e.target.value)} />}
+                                    { collection.string_2_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label={collection.string_2_name} onChange={e => setString_2_value(e.target.value)} />}
+                                    { collection.string_3_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="string" label={collection.string_3_name} onChange={e => setString_3_value(e.target.value)} />}
+                                { collection.text_1_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label={collection.text_1_name} onChange={e => setText_1_value(e.target.value)} />}
+                                { collection.text_2_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label={collection.text_2_name} onChange={e => setText_2_value(e.target.value)} />}
+                                { collection.text_3_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label={collection.text_3_name} onChange={e => setText_3_value(e.target.value)} />}
+
+                                {collection.date_1_enabled && <LocalizationProvider dateAdapter={AdapterDayjs} >
                                     <DatePicker
-                                        label="Basic example"
+                                        label={collection.date_1_name}
                                         value={date_1_value}
                                         onChange={e => setDate_1_value(e.target.value)}
-                                        renderInput={(params) => <TextField sx={{mb: 1}}  {...params} />}
+                                        renderInput={(params) => <TextField fullWidth sx={{mb: 1}}  {...params} />}
                                     />
-                                </LocalizationProvider>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                </LocalizationProvider>}
+                                {collection.date_2_enabled && <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
                                         sx={{mb: 1}}
-                                        label="Basic example"
+                                        label={collection.date_2_name}
                                         onChange={e => setDate_2_value(e.target.value)}
-                                        renderInput={(params) => <TextField sx={{mb: 1}} {...params} />}
+                                        renderInput={(params) => <TextField fullWidth sx={{mb: 1}} {...params} />}
                                     />
-                                </LocalizationProvider>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    </LocalizationProvider>}
+                                {collection.date_3_enabled && <LocalizationProvider dateAdapter={AdapterDayjs}>
                                     <DatePicker
                                         sx={{mb: 1}}
-                                        label="Basic example"
+                                        label={collection.date_3_name}
                                         onChange={e => setDate_3_value(e.target.value)}
-                                        renderInput={(params) => <TextField sx={{mb: 1}} {...params} />}
+                                        renderInput={(params) => <TextField fullWidth sx={{mb: 1}} {...params} />}
                                     />
-                                </LocalizationProvider>
-                                    {/*<TextField*/}
-                                    {/*    id="datetime-local"*/}
-                                    {/*    label="Next appointment"*/}
-                                    {/*    type="datetime-local"*/}
-                                    {/*    sx={{ width: 250 }}*/}
-                                    {/*    InputLabelProps={{*/}
-                                    {/*        shrink: true,*/}
-                                    {/*    }}*/}
-                                    {/*    onChange={(newValue) => {*/}
-                                    {/*        setDate_1_value(newValue);*/}
-                                    {/*    }}*/}
-                                    {/*/>*/}
-
-                                    {/*<LocalizationProvider dateAdapter={AdapterDayjs}>*/}
-                                    {/*    <DatePicker*/}
-                                    {/*        label="Basic example"*/}
-                                    {/*        value={date_1_value}*/}
-                                    {/*        onChange={(newValue) => {*/}
-                                    {/*            setDate_1_value(newValue);*/}
-                                    {/*        }}*/}
-                                    {/*        renderInput={(params) => <TextField {...params} />}*/}
-                                    {/*    />*/}
-
-                                    {/*</LocalizationProvider>*/}
-                                    {/*<DatePicker id="standard-basic" type="date" label="Date 2 Value" onChange={e => setDate_2_value(e.target.value)} renderInput={(params) => <TextField {...params} />}*/}
-                                    {/*/>*/}
-                                    {/*<DatePicker id="standard-basic" type="date" label="Date 3 Value" onChange={e => setDate_3_value(e.target.value)} renderInput={(params) => <TextField {...params} />}*/}
-                                    {/*/>*/}
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <h3>Boolean fields</h3>
-                            <FormControlLabel sx={{mb: 1}} fullWidth control={<Checkbox id="standard-basic" type="checkbox" onChange={e => setBoolean_1_value(e.target.value)}/>} label="Boolean 1 Value"/>
-                            <FormControlLabel sx={{mb: 1}} fullWidth control={<Checkbox id="standard-basic" type="checkbox" label="Boolean 2 Value" onChange={e => setBoolean_2_value(e.target.value)}/>} label="Boolean 2 Value" />
-                            <FormControlLabel fullWidth control={<Checkbox id="standard-basic" type="checkbox" label="Boolean 3 Value" onChange={e => setBoolean_3_value(e.target.value)}/>} label="Boolean 3 Value" />
-                        </Grid>
+                                </LocalizationProvider>}
+                            {collection.boolean_1_enabled &&<FormControlLabel sx={{mb: 1}} control={<Checkbox id="standard-basic" type="checkbox" onChange={e => setBoolean_1_value(e.target.value)}/>} label={collection.boolean_1_name} fullWidth/>}
+                            {collection.boolean_2_enabled &&<FormControlLabel sx={{mb: 1}} control={<Checkbox id="standard-basic" type="checkbox"  onChange={e => setBoolean_2_value(e.target.value)}/>} label={collection.boolean_2_name} fullWidth/>}
+                            {collection.boolean_3_enabled &&<FormControlLabel control={<Checkbox id="standard-basic" type="checkbox" onChange={e => setBoolean_3_value(e.target.value)}/>} label={collection.boolean_3_name} fullWidth/>}
                     </Grid>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12}>

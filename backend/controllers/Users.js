@@ -8,6 +8,10 @@ import Comments from "../models/CommentModel.js";
 dotenv.config();
 
 export const getUsers = async(req, res) => {
+    const user = await Users.findByPk(req.userId)
+
+    if(!user.isAdmin) return res.sendStatus(401);
+
     try {
         const users = await Users.findAll({
             attributes:['id','firstName','lastName','email', 'isAdmin', 'isBlocked'],

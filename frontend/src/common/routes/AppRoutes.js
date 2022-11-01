@@ -10,6 +10,7 @@ import CreateItem from "../../app/collections/items/CreateItem"
 import ItemShow from "../../app/collections/items/ItemShow";
 import routes from "../../shared/constants/routes";
 import Dashboard from "../dashboard/Dashboard";
+import CollectionsAll from "../../app/collections/CollectionsAll";
 
 export default function AppRoutes() {
     return (
@@ -23,6 +24,7 @@ export default function AppRoutes() {
             <Route path={routes.ITEM_CREATE} element={<CreateItem/>} />
             <Route path={routes.ITEM_SHOW} element={<ItemShow/>} />
             <Route path={routes.DASHBOARD} element={<Dashboard/>} />
+            <Route path={routes.ALL_COLLECTIONS} element={<CollectionsAll/>} />
         </Routes>
     );
 }

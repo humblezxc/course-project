@@ -24,12 +24,12 @@ const theme = createTheme();
 
 export default function Home() {
     const [items, setItems] = useState([]);
-    const [collection, setCollection] = useState([]);
+    const [collections, setCollections] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/collections")
+        axios.get("/api/collections/sorted")
             .then(res => {
-                setCollection(res.data);
+                setCollections(res.data);
             })
             .catch(err => console.log(err));
 
@@ -92,8 +92,8 @@ export default function Home() {
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell component="th" scope="row" >{item.itemName}</TableCell>
-                                            <TableCell align="center">Collection name</TableCell>
-                                            <TableCell align="right">Author name</TableCell>
+                                            <TableCell align="center">{item.collection.collectionName}</TableCell>
+                                            <TableCell align="right">{item.user.firstName}</TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
@@ -115,7 +115,7 @@ export default function Home() {
                             Top 5 Collections
                         </Typography>
                         <List>
-                            {collection.map((collection) => (
+                            {collections.map((collection) => (
                                 <ListItem key={collection.id}>
                                     <Card sx={{ width: 675}}>
                                         <CardContent>
@@ -161,7 +161,7 @@ export default function Home() {
                     color="text.secondary"
                     component="p"
                 >
-                    Something here to give the footer a purpose!
+                    Created by Yaroslav Stopenchuk
                 </Typography>
             </Box>
             {/* End footer */}

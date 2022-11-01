@@ -2,7 +2,13 @@ import express from "express";
 import {getUsers, Register, Login, Logout, Admin, deleteUser, blockUser} from "../controllers/Users.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
-import {getCollections, NewCollection, getCollection, deleteCollection} from "../controllers/Collections.js";
+import {
+    getCollections,
+    NewCollection,
+    getCollection,
+    deleteCollection,
+    getAllCollections, getBiggerCollections
+} from "../controllers/Collections.js";
 import {deleteItem, getItem, getItems, lastItems, newItem} from "../controllers/Item.js";
 import {getComments, newComments} from "../controllers/Comments.js";
 
@@ -17,6 +23,8 @@ router.post('/api/users/admin/:id', Admin);
 router.delete('/api/users/:id', deleteUser);
 router.post('/api/users/block/:id', blockUser);
 
+router.get('/api/collections/all', getAllCollections)
+router.get('/api/collections/sorted', getBiggerCollections)
 router.get('/api/collections', verifyToken, getCollections)
 router.get('/api/collections/:id', getCollection)
 router.post('/api/collections', verifyToken, NewCollection);

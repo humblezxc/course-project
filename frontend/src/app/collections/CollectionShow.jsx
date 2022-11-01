@@ -21,6 +21,8 @@ export default function CollectionShow() {
     const [items, setItems] = useState([]);
     const collectionId = window.location.pathname.split("/")[2];
     const navigate = useNavigate()
+    const user = JSON.parse(localStorage.getItem('user'));
+
     useEffect(() => {
         axios.get("/api/collections/" + collectionId).then(res => {
                 setCollection(res.data);
@@ -65,6 +67,40 @@ export default function CollectionShow() {
             }
         }
     };
+    const permissionCheck = () => {
+        if (user && (user.id === collection.userId || user.isAdmin === true)) {
+            return (
+                <>
+                <Button key="edit" variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/edit"}>Edit collection</Button>
+                <Button key="delete" variant="outlined" onClick={() => deleteCollection(collection.id)}>Delete collection</Button>
+                <Button key="create_item" variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/items/create"}>Add Item</Button>
+                </>
+        );
+        }
+    }
+
+
+    const editPermissionCheck = (item) => {
+        if (user && (user.id === collection.userId || user.isAdmin === true)) {
+            return (
+                <>
+                    <TableCell align="right"><Button variant="outlined" href={routes.COLLECTIONS + "/" + collection.id + "/" + item.id + "/edit"}>Edit</Button></TableCell>
+                    <TableCell align="right"><Button variant="contained" onClick={() => deleteItem(item.id)}>Delete</Button></TableCell>
+                </>
+            );
+        }
+    }
+
+    const editColumnPermissionCheck = () => {
+        if (user && (user.id === collection.userId || user.isAdmin === true)) {
+            return (
+                <>
+                    <TableCell align="right">Edit</TableCell>
+                    <TableCell align="right">Delete</TableCell>
+                </>
+            );
+        }
+    }
 
     return (
 
@@ -109,9 +145,7 @@ export default function CollectionShow() {
                             justifyContent="center"
 
                         >
-                            <Button  key="edit" variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/edit"}>Edit collection</Button>
-                            <Button key="delete" variant="outlined" onClick={() => deleteCollection(collection.id)}>Delete collection</Button>
-                            <Button key="create_item" variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/items/create"}>Add Item</Button>
+                            {permissionCheck()}
                         </Stack>
                     </Container>
                 </Box>
@@ -121,10 +155,9 @@ export default function CollectionShow() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Items name</TableCell>
-                                    <TableCell>Items data</TableCell>
+                                    <TableCell></TableCell>
                                     <TableCell align="right">View</TableCell>
-                                    <TableCell align="right">Edit</TableCell>
-                                    <TableCell align="right">Delete</TableCell>
+                                    {editColumnPermissionCheck()}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -134,10 +167,9 @@ export default function CollectionShow() {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                                 <TableCell component="th" scope="row" >{item.itemName}</TableCell>
-                                                 <TableCell>item data</TableCell>
+                                                 <TableCell></TableCell>
                                                 <TableCell align="right"><Button variant="contained" href={routes.COLLECTIONS + "/" + collection.id + "/items/" + item.id}>View</Button></TableCell>
-                                                <TableCell align="right"><Button variant="outlined" href={routes.COLLECTIONS + "/" + collection.id + "/" + item.id + "/edit"}>Edit</Button></TableCell>
-                                                <TableCell align="right"><Button variant="contained" onClick={() => deleteItem(item.id)}>Delete</Button></TableCell>
+                                                {editPermissionCheck(item)}
                                     </TableRow>
                                 ))}
                             </TableBody>
