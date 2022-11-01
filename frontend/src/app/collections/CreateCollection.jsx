@@ -53,7 +53,6 @@ export default function CreateCollection() {
     });
 
     const [collectionName, setCollectionName] = useState('');
-    // const [teg, setTeg] = useState('');
     const [description, setDescription] = useState('');
     const [additionFields, setAdditionFields] = React.useState([
         { key: 'digit_1', enabled: false, value: ''},
@@ -77,7 +76,6 @@ export default function CreateCollection() {
         { key: 'date_3', enabled: false, value: '' },
     ]);
     const handleToggle = ({ target }) => {
-        console.log(target)
         setAdditionFields(current =>
             current.map(obj => {
                 if (obj.key === target.name) {
@@ -107,7 +105,6 @@ export default function CreateCollection() {
         e.preventDefault();
         const params = {
             collectionName: collectionName,
-            // teg: teg,
             description: description
         }
         const object = additionFields.reduce(

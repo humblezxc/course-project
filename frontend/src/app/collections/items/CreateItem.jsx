@@ -17,6 +17,8 @@ import Typography from "@mui/material/Typography";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import dayjs from 'dayjs';
 
 export default function CreateItem() {
     const [collection, setCollection] = useState([]);
@@ -130,26 +132,31 @@ export default function CreateItem() {
                                 { collection.text_3_enabled && <TextField fullWidth sx={{mb: 1}} id="standard-basic" type="text" label={collection.text_3_name} onChange={e => setText_3_value(e.target.value)} />}
 
                                 {collection.date_1_enabled && <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                    <DatePicker
+                                    <DateTimePicker
                                         label={collection.date_1_name}
-                                        value={date_1_value}
-                                        onChange={e => setDate_1_value(e.target.value)}
-                                        renderInput={(params) => <TextField fullWidth sx={{mb: 1}}  {...params} />}
+                                        key='date_1_value'
+                                        value={dayjs(date_1_value)}
+                                        onChange={e => setDate_1_value(e)}
+                                        renderInput={(params) => <TextField fullWidth sx={{mb: 1}} {...params} />}
                                     />
                                 </LocalizationProvider>}
                                 {collection.date_2_enabled && <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
+                                    <DateTimePicker
                                         sx={{mb: 1}}
+                                        key='date_2_value'
                                         label={collection.date_2_name}
-                                        onChange={e => setDate_2_value(e.target.value)}
+                                        value={dayjs(date_2_value)}
+                                        onChange={e => setDate_2_value(e)}
                                         renderInput={(params) => <TextField fullWidth sx={{mb: 1}} {...params} />}
                                     />
                                     </LocalizationProvider>}
                                 {collection.date_3_enabled && <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
+                                    <DateTimePicker
                                         sx={{mb: 1}}
+                                        key='date_3_value'
                                         label={collection.date_3_name}
-                                        onChange={e => setDate_3_value(e.target.value)}
+                                        value={dayjs(date_3_value)}
+                                        onChange={e => setDate_3_value(e)}
                                         renderInput={(params) => <TextField fullWidth sx={{mb: 1}} {...params} />}
                                     />
                                 </LocalizationProvider>}

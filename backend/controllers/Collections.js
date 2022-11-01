@@ -71,15 +71,13 @@ export const getBiggerCollections = async (req, res) => {
             group: ['items.collectionId'],
             order: [['itemsCount', 'DESC']]
         })
-        console.log(collections.slice(0,5))
-        res.json(collections)
+        res.json(collections.slice(0,5))
     }catch (error){
         console.log(error);
     }
 }
 
 export const getCollections = async (req, res) => {
-    console.log(req.isAdmin)
     const user = await Users.findByPk(req.userId)
     const collectionAccess = user.isAdmin ? {} : { userId: user.id }
 
@@ -121,7 +119,6 @@ export const NewCollection = async(req, res) => {
             })
         }
     } catch (error) {
-        console.log(error);
         res.status(500).json({
             message: 'Something goes wrong',
             data: {}
