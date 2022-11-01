@@ -6,25 +6,31 @@ import Grid from "@mui/material/Grid";
 import CommentForm from "./CommentForm";
 import {Typography} from "@mui/material";
 
-export default function Comments({currentUserId}) {
+export default function Comments({}) {
     const [comments, setComments] = useState([]);
 
     const collectionId = window.location.pathname.split("/")[2];
     const itemId = window.location.pathname.split("/")[4];
 
     useEffect(() => {
-        axios.get("/api/collections/" + collectionId + "/items/" + itemId + "/comments")
-            .then(res => {
-                setComments(res.data);
-            })
-            .catch(err => console.log(err));
-
+        const interval = setInterval(() => {
+            axios.get("/api/collections/" + collectionId + "/items/" + itemId + "/comments")
+                .then(res => {
+                    setComments(res.data);
+                })
+                .catch(err => console.log(err));
+        }, 3000);
+        return () => clearInterval(interval);
     }, []);
 
     const addComment = async (text) => {
         try {
             await axios.post("/api/collections/" + collectionId + "/items/" + itemId + "/comments", {
-                body: text,
+                body: text
+            }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                }
             });
         } catch (error) {
             if (error.response) {
